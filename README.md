@@ -1,5 +1,7 @@
 # AI Assistant
 
+![alt text](public/main-logo.jpg)
+
 ## Commands
 
 ### `npm install`
