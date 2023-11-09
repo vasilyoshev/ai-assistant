@@ -1,1 +1,1 @@
-export const App = () => <>AI Assistant</>
+export const App = () => <>AI Assistant!</>
