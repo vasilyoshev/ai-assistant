@@ -1,7 +1,7 @@
 {
   "name": "find-the-differences-ai",
   "version": "0.1.0",
-  "homepage": "https://vasilyoshev.github.io/ai-assistant",
+  "homepage": "https://vasilyoshev.github.io/find-the-differences-ai",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
