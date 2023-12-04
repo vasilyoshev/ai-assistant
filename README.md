@@ -2,7 +2,7 @@
 
 ![alt text](public/main-logo.jpg)
 
-## Commands
+## Development
 
 ### `npm install`
 
