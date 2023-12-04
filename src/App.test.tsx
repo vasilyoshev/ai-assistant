@@ -3,6 +3,6 @@ import { App } from './App';
 
 test('renders learn react link', () => {
   render(<App />);
-  const aiAssistantTest = screen.getByText(/AI Assistant/i);
-  expect(aiAssistantTest).toBeInTheDocument();
+  const findTheDifferencesAiTest = screen.getByText(/Find the differences AI/i);
+  expect(findTheDifferencesAiTest).toBeInTheDocument();
 });

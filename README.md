@@ -1,4 +1,4 @@
-# AI Assistant
+# Find the differences AI
 
 ![alt text](public/main-logo.jpg)
 
