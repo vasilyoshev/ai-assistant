@@ -1,4 +1,4 @@
-# Find the differences AI
+# [Find the differences AI](https://vasilyoshev.github.io/find-the-differences-ai/)
 
 ![alt text](public/main-logo.jpg)
 
