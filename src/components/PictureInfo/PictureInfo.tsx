@@ -1,1 +1,1 @@
-export const PictureInfo = () => <>Info about the pictures</>;
+export const PictureInfo = () => <div>Info about the pictures</div>;
