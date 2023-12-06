@@ -1,0 +1,1 @@
+export const PictureInfo = () => <>Info about the pictures</>;
