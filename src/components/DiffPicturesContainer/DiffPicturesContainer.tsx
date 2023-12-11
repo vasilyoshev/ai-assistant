@@ -1,9 +1,9 @@
-import { PictureContainer } from "../DiffPicture/DiffPicture";
+import { DiffPicture, InpaintMask } from "components";
 import styles from "./DiffPicturesContainer.module.scss";
 
 export const DiffPicturesContainer = () => (
   <div className={styles.wrapper}>
-    <PictureContainer />
-    <PictureContainer />
+    <DiffPicture />
+    <InpaintMask />
   </div>
 );
