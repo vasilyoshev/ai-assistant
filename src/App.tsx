@@ -1,4 +1,4 @@
-import { DiffPicturesContainer, PictureInfo } from "./components";
+import { DiffPicturesContainer, PictureInfo } from "components";
 import styles from "./App.module.scss";
 
 export const App = () => (
