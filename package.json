@@ -1,7 +1,6 @@
 {
   "name": "find-the-differences-ai",
   "version": "0.1.0",
-  "homepage": "https://vasilyoshev.github.io/find-the-differences-ai",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.11.1",
