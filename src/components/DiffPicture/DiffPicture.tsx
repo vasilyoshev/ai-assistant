@@ -1,8 +1,9 @@
+import { FunctionComponent } from "react";
 import styles from "./DiffPicture.module.scss";
 
-export const DiffPicture = () => (
+export const DiffPicture: FunctionComponent<{ src: string }> = ({ src }) => (
   <img
-    src={process.env.PUBLIC_URL + "/mockImage.png"}
+    src={src}
     alt="original"
     className={styles.image}
   />

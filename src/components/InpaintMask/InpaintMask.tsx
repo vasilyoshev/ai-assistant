@@ -1,8 +1,11 @@
-import { useEffect, useRef } from "react";
+import { FunctionComponent, useEffect, useRef } from "react";
 import { MaskCircle } from "interfaces";
-import { createCircle } from "./createCircle";
+import { createCircle } from "utils";
+import styles from "./InpaintMask.module.scss";
 
-export const InpaintMask = () => {
+export const InpaintMask: FunctionComponent<{
+  onMaskGenerated: (context: HTMLCanvasElement) => void;
+}> = ({ onMaskGenerated }) => {
   const maskRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -22,10 +25,11 @@ export const InpaintMask = () => {
       context.fillStyle = "black";
       context.fill();
       context.closePath();
+      onMaskGenerated(canvas);
     }
 
     console.log(circles); // Save the circles array for later use
   }, []);
 
-  return <canvas ref={maskRef} width="1024" height="1024"></canvas>;
+  return <canvas className={styles.canvas} ref={maskRef} width="1024" height="1024"></canvas>;
 };

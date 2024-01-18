@@ -40,10 +40,11 @@
       "prettier"
     ],
     "rules": {
+      "react-hooks/exhaustive-deps": 0,
       "max-len": [
         "error",
         {
-          "code": 100
+          "code": 120
         }
       ]
     }

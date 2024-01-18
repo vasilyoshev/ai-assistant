@@ -1,5 +1,4 @@
 import { MaskCircle } from "interfaces";
-import { circleOverlaps } from "./circleOverlaps";
 
 export const createCircle = (circles: MaskCircle[]) => {
   const minRadius = 30; // TODO extract to param
@@ -20,3 +19,11 @@ export const createCircle = (circles: MaskCircle[]) => {
 
   return newCircle;
 };
+
+const circleOverlaps = (newCircle: MaskCircle, circles: MaskCircle[]) =>
+  circles.some((circle) => {
+    const distance = Math.sqrt(
+      (circle.x - newCircle.x) ** 2 + (circle.y - newCircle.y) ** 2,
+    );
+    return distance < circle.radius + newCircle.radius;
+  });
