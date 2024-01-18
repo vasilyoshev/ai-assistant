@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import FormData from "form-data";
 import { useGetMaskedPicMutation, useGetOriginalPicMutation } from "api";
 import { DiffPicture, InpaintMask } from "components";
 import styles from "./DiffPicturesContainer.module.scss";
