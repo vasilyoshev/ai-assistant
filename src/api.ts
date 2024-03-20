@@ -1,24 +1,10 @@
-import {
-  Balance,
-  GenerationRequest,
-  GenerationResponse,
-  MaskingRequest,
-  User,
-} from "interfaces";
+import { Balance, GenerationRequest, GenerationResponse, User } from "interfaces";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const api = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://api.stability.ai/v1/",
-    prepareHeaders: (headers) => {
-      headers.set(
-        "authorization",
-        `Bearer sk-xRwOzr8D6m8M3zuDLIoYYz167iPSnfRreHSHjhHI5XimDcdP`,
-      );
-
-      return headers;
-    },
+    baseUrl: process.env.REACT_APP_API_BASE_URL,
   }),
   endpoints: (builder) => ({
     getUserInfo: builder.query<User, void>({
@@ -44,9 +30,4 @@ export const api = createApi({
   }),
 });
 
-export const {
-  useGetUserInfoQuery,
-  useGetBalanceQuery,
-  useGetOriginalPicMutation,
-  useGetMaskedPicMutation,
-} = api;
+export const { useGetUserInfoQuery, useGetBalanceQuery, useGetOriginalPicMutation, useGetMaskedPicMutation } = api;

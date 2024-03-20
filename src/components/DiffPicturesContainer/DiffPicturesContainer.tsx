@@ -29,7 +29,7 @@ export const DiffPicturesContainer = () => {
       sampler: "K_EULER_ANCESTRAL",
     };
 
-    getOriginalPic(body);
+    // getOriginalPic(body);
   }, []);
 
   useEffect(() => {
@@ -70,7 +70,7 @@ export const DiffPicturesContainer = () => {
     form.append("text_prompts[1][weight]", "-1");
     form.append("sampler", "K_EULER_ANCESTRAL");
 
-    getMaskedPic(form as any);
+    // getMaskedPic(form as any);
   }, [originalPic, mask]);
 
   return (
