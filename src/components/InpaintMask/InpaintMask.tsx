@@ -14,6 +14,10 @@ export const InpaintMask: FunctionComponent<{
 
     if (!canvas || !context) return;
 
+    // Fill the canvas with a white background
+    context.fillStyle = 'white';
+    context.fillRect(0, 0, canvas.width, canvas.height);
+
     const circles: MaskCircle[] = [];
     const numberOfCircles = 5; // TODO extract to param
 

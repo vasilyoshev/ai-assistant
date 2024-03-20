@@ -1,4 +1,4 @@
-import { Balance, GenerationRequest, GenerationResponse, User } from "interfaces";
+import { Balance, PicturesRequest, PicturesResponse, User } from "interfaces";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const api = createApi({
@@ -13,16 +13,9 @@ export const api = createApi({
     getBalance: builder.query<Balance, void>({
       query: () => "user/balance",
     }),
-    getOriginalPic: builder.mutation<GenerationResponse, GenerationRequest>({
+    generatePics: builder.mutation<PicturesResponse, PicturesRequest>({
       query: (body) => ({
-        url: "generation/stable-diffusion-xl-1024-v1-0/text-to-image",
-        method: "POST",
-        body,
-      }),
-    }),
-    getMaskedPic: builder.mutation<GenerationResponse, FormData>({
-      query: (body) => ({
-        url: "generation/stable-diffusion-xl-1024-v1-0/image-to-image/masking",
+        url: "generate",
         method: "POST",
         body,
       }),
@@ -30,4 +23,4 @@ export const api = createApi({
   }),
 });
 
-export const { useGetUserInfoQuery, useGetBalanceQuery, useGetOriginalPicMutation, useGetMaskedPicMutation } = api;
+export const { useGetUserInfoQuery, useGetBalanceQuery, useGeneratePicsMutation } = api;
