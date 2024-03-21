@@ -61,7 +61,7 @@ export const DiffPicturesContainer = () => {
       canvasMaskedRef.current.height = 1024;
       canvasMaskedRef.current.width = 1024;
     }
-  }, [canvasOriginalRef.current, canvasMaskedRef.current]);
+  }, [generatedPics.isSuccess]);
 
   useEffect(() => {
     if (!mask) return;
