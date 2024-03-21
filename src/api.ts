@@ -1,5 +1,8 @@
 import { Balance, PicturesRequest, PicturesResponse, User } from "interfaces";
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { FetchBaseQueryError, createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { mockGenerate } from "mocks";
+import { RootState } from "store";
+import { QueryReturnValue } from "@reduxjs/toolkit/dist/query/baseQueryTypes";
 
 export const api = createApi({
   reducerPath: "api",
@@ -14,11 +17,19 @@ export const api = createApi({
       query: () => "user/balance",
     }),
     generatePics: builder.mutation<PicturesResponse, PicturesRequest>({
-      query: (body) => ({
-        url: "generate",
-        method: "POST",
-        body,
-      }),
+      queryFn: async (body, queryApi, extraOptions, baseQuery) => {
+        const { app } = queryApi.getState() as RootState;
+
+        if (app.mocksEnabled) {
+          return { data: mockGenerate as PicturesResponse };
+        } else {
+          return (await baseQuery({
+            url: "generate",
+            method: "POST",
+            body,
+          })) as QueryReturnValue<PicturesResponse, FetchBaseQueryError>;
+        }
+      },
     }),
   }),
 });
