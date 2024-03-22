@@ -1,4 +1,4 @@
-import { RefObject, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectCurrentCircles, setCircleClickedById } from "slices";
 import { useGeneratePicsMutation } from "api";
