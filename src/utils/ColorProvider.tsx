@@ -12,7 +12,7 @@ export const ColorProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     // stop animation in development due to dev tools problems
-    // if (process.env.NODE_ENV === "development") return;
+    if (process.env.NODE_ENV === "development") return;
 
     animate(colorMotionValue, COLORS_TOP, {
       ease: "easeInOut",

@@ -2,6 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import { motion, useMotionTemplate } from "framer-motion";
 import { ClassicRoute, HomeRoute } from "routes";
 import { usePrimaryColor } from "utils";
+import { Meteors } from "components";
 import styles from "./App.module.scss";
 
 export const App = () => {
@@ -14,6 +15,7 @@ export const App = () => {
         <Route path="/classic" element={<ClassicRoute />} />
         <Route path="/" element={<HomeRoute />} />
       </Routes>
+      <Meteors number={20} />
     </motion.div>
   );
 };
