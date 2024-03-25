@@ -19,13 +19,15 @@ export const ClassicRoute = () => {
     <>
       <DiffPicturesContainer />
       <PictureInfo />
-      User: {user?.email} <br />
-      Credits: {balance?.credits}
       {process.env.NODE_ENV === "development" && (
-        <Fab variant="extended" color={mocksEnabled ? "primary" : "error"} onClick={onToggleMocksClick}>
-          <BugReportIcon sx={{ mr: 1 }} />
-          Mocks {mocksEnabled ? "ON" : "OFF"}
-        </Fab>
+        <>
+          User: {user?.email} <br />
+          Credits: {balance?.credits}
+          <Fab variant="extended" color={mocksEnabled ? "primary" : "error"} onClick={onToggleMocksClick}>
+            <BugReportIcon sx={{ mr: 1 }} />
+            Mocks {mocksEnabled ? "ON" : "OFF"}
+          </Fab>
+        </>
       )}
     </>
   );
