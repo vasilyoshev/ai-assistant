@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { motion, useMotionTemplate } from "framer-motion";
+import { Variants, motion, useMotionTemplate } from "framer-motion";
 import { AnimatedButton } from "components";
 import { usePrimaryColor } from "utils";
 import styles from "./HomeRoute.module.scss";
@@ -8,9 +8,9 @@ export const HomeRoute = () => {
   const colorMotionValue = usePrimaryColor();
   const textColor = useMotionTemplate`${colorMotionValue}`;
 
-  const variants = {
-    hidden: { opacity: 0, y: -50, x: -50 },
-    visible: { opacity: 1, y: 0, x: 0, transition: { duration: 1, delay: 0.5 } },
+  const variants: Variants = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1, transition: { duration: 0.6, delay: 0.4 } },
   };
 
   return (
@@ -19,9 +19,9 @@ export const HomeRoute = () => {
         pl<motion.span style={{ color: textColor }}>AI</motion.span>box
       </motion.span>
       <Link to="/classic">
-        <AnimatedButton>Find the differences</AnimatedButton>
+        <AnimatedButton variants={variants}>Find the differences</AnimatedButton>
       </Link>
-      <AnimatedButton>About</AnimatedButton>
+      <AnimatedButton variants={variants}>About</AnimatedButton>
     </div>
   );
 };
