@@ -21,6 +21,7 @@ export const App = () => {
     animate(gradientMotionValue, 150, {
       ease: "easeInOut",
       duration: 1,
+      delay: 0.5,
     });
   }, []);
 
