@@ -1,9 +1,9 @@
 import { ReactNode } from "react";
-import { Variants, motion, useMotionTemplate } from "framer-motion";
+import { motion, useMotionTemplate } from "framer-motion";
 import { usePrimaryColor } from "utils";
 import styles from "./AnimatedButton.module.scss";
 
-export const AnimatedButton = ({ children, variants }: { children: ReactNode; variants: Variants }) => {
+export const AnimatedButton = ({ children }: { children: ReactNode }) => {
   const colorMotionValue = usePrimaryColor();
   const boxShadow = useMotionTemplate`0 0 50px ${colorMotionValue}, 0 0 0 ${colorMotionValue}`;
   const color = useMotionTemplate`${colorMotionValue}`;
@@ -11,7 +11,6 @@ export const AnimatedButton = ({ children, variants }: { children: ReactNode; va
   return (
     <motion.button
       className={styles.button}
-      variants={variants}
       style={{ boxShadow }}
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.9 }}

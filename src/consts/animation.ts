@@ -1,0 +1,1 @@
+export const initialAnimationDelay = 0.2; // used for smooth transition from splash screen on initial load

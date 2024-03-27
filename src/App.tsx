@@ -1,10 +1,9 @@
-import { Route, Routes } from "react-router-dom";
-import { animate, motion, useMotionTemplate, useMotionValue } from "framer-motion";
-import { ClassicRoute, HomeRoute } from "routes";
-import { usePrimaryColor } from "utils";
-import { Meteors } from "components";
-import styles from "./App.module.scss";
 import { useEffect } from "react";
+import { animate, motion, useMotionTemplate, useMotionValue } from "framer-motion";
+import { Meteors } from "components";
+import { AppRouter, usePrimaryColor } from "utils";
+import { initialAnimationDelay } from "consts";
+import styles from "./App.module.scss";
 
 export const App = () => {
   const colorMotionValue = usePrimaryColor();
@@ -20,17 +19,14 @@ export const App = () => {
   useEffect(() => {
     animate(gradientMotionValue, 150, {
       ease: "easeInOut",
-      duration: 1,
-      delay: 0.5,
+      duration: 0.5,
+      delay: initialAnimationDelay,
     });
   }, []);
 
   return (
     <motion.div className={styles.wrapper} style={{ backgroundImage }}>
-      <Routes>
-        <Route path="/classic" element={<ClassicRoute />} />
-        <Route path="/" element={<HomeRoute />} />
-      </Routes>
+      <AppRouter />
       <Meteors number={20} />
     </motion.div>
   );
