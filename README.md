@@ -1,6 +1,6 @@
 # [Find the differences AI](https://find-the-differences-ai.onrender.com)
 
-![alt text](public/main-logo.jpg)
+![alt text](public/assets/manifest-icon-512.maskable.png)
 
 ## Development
 
