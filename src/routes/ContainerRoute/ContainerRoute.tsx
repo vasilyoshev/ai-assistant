@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { AnimatePresence, animate, motion, useMotionTemplate, useMotionValue, useSpring } from "framer-motion";
 import { selectIsInitialLoad, toggleOffIsInitialLoad } from "slices";
 import { AnimatedOutlet, usePrimaryColor } from "utils";
@@ -63,10 +63,10 @@ export const ContainerRoute = () => {
         animate(titleLeft, "94%", { duration: 0.5 });
         animate(titleFontSize, "40px", { duration: 0.5 });
         break;
-        default:
-          animate(titleMarginTop, "30px", { duration: 0.5 });
-          animate(titleLeft, "50%", { duration: 0.5 });
-          animate(titleFontSize, "70px", { duration: 0.5 });
+      default:
+        animate(titleMarginTop, "30px", { duration: 0.5 });
+        animate(titleLeft, "50%", { duration: 0.5 });
+        animate(titleFontSize, "70px", { duration: 0.5 });
     }
   }, [location.pathname]);
 
@@ -74,9 +74,11 @@ export const ContainerRoute = () => {
     <>
       {/* TODO describe name transition logic in readme, both for title and pages overall */}
       <AnimatePresence mode="wait">
-        <motion.span className={styles.name} style={titleStyle}>
-          pl<motion.span style={{ color: textColor }}>AI</motion.span>box
-        </motion.span>
+        <Link to="/">
+          <motion.span className={styles.name} style={titleStyle}>
+            pl<motion.span style={{ color: textColor }}>AI</motion.span>box
+          </motion.span>
+        </Link>
       </AnimatePresence>
       <AnimatePresence mode="wait">
         <motion.div
