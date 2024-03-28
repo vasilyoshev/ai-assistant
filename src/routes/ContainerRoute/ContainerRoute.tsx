@@ -16,8 +16,9 @@ export const ContainerRoute = () => {
   const isInitialLoad = useSelector(selectIsInitialLoad);
   const colorMotionValue = usePrimaryColor();
   const textColor = useMotionTemplate`${colorMotionValue}`;
-  const titleMarginTop = useMotionValue("35px");
-  const titleMarginBottom = useMotionValue("100px");
+  const titleMarginTop = useMotionValue("30px");
+  const titleLeft = useMotionValue("50%");
+  const titleFontSize = useMotionValue("90px");
   const initialOpacity = 0;
   const finalOpacity = 1;
   const routeTransitionDuration = 0.3;
@@ -28,7 +29,8 @@ export const ContainerRoute = () => {
 
   const titleStyle = {
     marginTop: titleMarginTop,
-    marginBottom: titleMarginBottom,
+    left: titleLeft,
+    fontSize: titleFontSize,
     opacity: titleOpacity,
   };
 
@@ -58,24 +60,33 @@ export const ContainerRoute = () => {
     switch (location.pathname) {
       case "/classic":
         animate(titleMarginTop, "0px", { duration: 0.5 });
-        animate(titleMarginBottom, "0px", { duration: 0.5 });
+        animate(titleLeft, "94%", { duration: 0.5 });
+        animate(titleFontSize, "40px", { duration: 0.5 });
         break;
-      default:
-        animate(titleMarginTop, "35px", { duration: 0.5 });
-        animate(titleMarginBottom, "100px", { duration: 0.5 });
+        default:
+          animate(titleMarginTop, "30px", { duration: 0.5 });
+          animate(titleLeft, "50%", { duration: 0.5 });
+          animate(titleFontSize, "70px", { duration: 0.5 });
     }
   }, [location.pathname]);
 
   return (
     <>
-      {/* TODO describe name transition logic in readme */}
+      {/* TODO describe name transition logic in readme, both for title and pages overall */}
       <AnimatePresence mode="wait">
         <motion.span className={styles.name} style={titleStyle}>
           pl<motion.span style={{ color: textColor }}>AI</motion.span>box
         </motion.span>
       </AnimatePresence>
       <AnimatePresence mode="wait">
-        <motion.div key={location.pathname} variants={variants} initial="hidden" animate="visible" exit="hidden">
+        <motion.div
+          className={styles.outletWrapper}
+          key={location.pathname}
+          variants={variants}
+          initial="hidden"
+          animate="visible"
+          exit="hidden"
+        >
           <AnimatedOutlet />
         </motion.div>
       </AnimatePresence>

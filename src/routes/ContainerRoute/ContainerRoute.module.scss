@@ -1,6 +1,14 @@
 .name {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 0);
+  font-size: 90px;
   color: white;
-  font-size: 70px;
-  margin-top: 35px;
-  margin-bottom: 100px;
+}
+
+.outletWrapper {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  width: 100%;
 }

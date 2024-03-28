@@ -7,6 +7,5 @@ export const HomeRoute = () => (
     <Link to="/classic">
       <AnimatedButton>Find the differences</AnimatedButton>
     </Link>
-    <AnimatedButton>About</AnimatedButton>
   </div>
 );
