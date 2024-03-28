@@ -18,6 +18,7 @@ export const ContainerRoute = () => {
   const textColor = useMotionTemplate`${colorMotionValue}`;
   const titleMarginTop = useMotionValue("30px");
   const titleLeft = useMotionValue("50%");
+  const titleTransform = useMotionValue("translate(-50%, 0)");
   const titleFontSize = useMotionValue("90px");
   const initialOpacity = 0;
   const finalOpacity = 1;
@@ -30,6 +31,7 @@ export const ContainerRoute = () => {
   const titleStyle = {
     marginTop: titleMarginTop,
     left: titleLeft,
+    transform: titleTransform,
     fontSize: titleFontSize,
     opacity: titleOpacity,
   };
@@ -60,12 +62,14 @@ export const ContainerRoute = () => {
     switch (location.pathname) {
       case "/classic":
         animate(titleMarginTop, "0px", { duration: 0.5 });
-        animate(titleLeft, "94%", { duration: 0.5 });
+        animate(titleLeft, "100%", { duration: 0.5 });
+        animate(titleTransform, "translate(-110%, 0)", { duration: 0.5 });
         animate(titleFontSize, "40px", { duration: 0.5 });
         break;
       default:
         animate(titleMarginTop, "30px", { duration: 0.5 });
         animate(titleLeft, "50%", { duration: 0.5 });
+        animate(titleTransform, "translate(-50%, 0)", { duration: 0.5 });
         animate(titleFontSize, "70px", { duration: 0.5 });
     }
   }, [location.pathname]);
