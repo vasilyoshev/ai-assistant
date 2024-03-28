@@ -1,4 +1,4 @@
-# [Find the differences AI](https://find-the-differences-ai.onrender.com)
+# [plAIbox](https://plaibox.onrender.com)
 
 ![alt text](public/assets/manifest-icon-512.maskable.png)
 
