@@ -5,7 +5,7 @@ import { DiffPicturesContainer, PictureInfo } from "components";
 import { selectMocksEnabled, toggleMocksEnabled } from "slices";
 import BugReportIcon from "@mui/icons-material/BugReport";
 
-export const ClassicRoute = () => {
+export const FindTheDifferencesRoute = () => {
   const dispatch = useDispatch();
   const { data: user } = useGetUserInfoQuery();
   const { data: balance } = useGetBalanceQuery();

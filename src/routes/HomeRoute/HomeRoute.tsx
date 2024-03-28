@@ -4,7 +4,7 @@ import styles from "./HomeRoute.module.scss";
 
 export const HomeRoute = () => (
   <div className={styles.wrapper}>
-    <Link to="/classic">
+    <Link to="/find-the-differences">
       <AnimatedButton>Find the differences</AnimatedButton>
     </Link>
   </div>

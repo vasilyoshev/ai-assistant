@@ -1,12 +1,12 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { ClassicRoute, ContainerRoute, HomeRoute } from "routes";
+import { FindTheDifferencesRoute, ContainerRoute, HomeRoute } from "routes";
 
 export const AppRouter = () => (
   <BrowserRouter>
     <Routes>
       <Route element={<ContainerRoute />}>
         <Route index element={<HomeRoute />} />
-        <Route path="classic" element={<ClassicRoute />} />
+        <Route path="find-the-differences" element={<FindTheDifferencesRoute />} />
       </Route>
     </Routes>
   </BrowserRouter>

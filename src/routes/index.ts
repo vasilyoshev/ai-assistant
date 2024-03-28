@@ -1,3 +1,3 @@
 export * from "./ContainerRoute";
 export * from "./HomeRoute";
-export * from "./ClassicRoute";
+export * from "./FindTheDifferencesRoute";

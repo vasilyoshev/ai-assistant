@@ -60,7 +60,7 @@ export const ContainerRoute = () => {
 
   useEffect(() => {
     switch (location.pathname) {
-      case "/classic":
+      case "/find-the-differences":
         animate(titleMarginTop, "0px", { duration: 0.5 });
         animate(titleLeft, "100%", { duration: 0.5 });
         animate(titleTransform, "translate(-110%, 0)", { duration: 0.5 });
