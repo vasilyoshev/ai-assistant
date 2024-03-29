@@ -1,6 +1,6 @@
 # [plAIbox](https://plaibox.onrender.com)
 
-![alt text](public/assets/manifest-icon-512.maskable.png)
+![logo](public/assets/manifest-icon-512.maskable.png)
 
 ![Flowchart](ftd-flowchart.png)
 ![Game state](ftd-game-state.png)
