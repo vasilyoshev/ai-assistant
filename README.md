@@ -2,6 +2,8 @@
 
 ![alt text](public/assets/manifest-icon-512.maskable.png)
 
+![Flowchart](flowchart.png)
+
 ## Development
 
 ### `npm install`
