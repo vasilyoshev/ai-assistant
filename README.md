@@ -2,8 +2,8 @@
 
 ![alt text](public/assets/manifest-icon-512.maskable.png)
 
-![Flowchart](flowchart.png)
-![Game state](game-state.drawio.png)
+![Flowchart](ftd-flowchart.png)
+![Game state](ftd-game-state.png)
 
 ## Development
 
