@@ -2,7 +2,7 @@ import { FunctionComponent, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { MaskCircle } from "interfaces";
 import { createCircle } from "utils";
-import { saveCircles, selectMocksEnabled } from "slices";
+import { saveDifferences, selectMocksEnabled } from "slices";
 import { mockCircles } from "mocks";
 import styles from "./InpaintMask.module.scss";
 
@@ -19,7 +19,7 @@ export const InpaintMask: FunctionComponent<{
 
     if (!canvas || !context) return;
 
-    // Fill the canvas with a white background
+    // Transparent bg doesn't work with masking endpoint
     context.fillStyle = "white";
     context.fillRect(0, 0, canvas.width, canvas.height);
 
@@ -41,7 +41,7 @@ export const InpaintMask: FunctionComponent<{
     }
 
     onMaskGenerated(canvas);
-    dispatch(saveCircles(circles));
+    dispatch(saveDifferences(circles));
   }, []);
 
   return <canvas className={styles.canvas} ref={maskRef} width="1024" height="1024"></canvas>;

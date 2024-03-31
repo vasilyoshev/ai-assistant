@@ -1,34 +1,17 @@
-import { useDispatch, useSelector } from "react-redux";
-import { Fab } from "@mui/material";
-import { useGetBalanceQuery, useGetUserInfoQuery } from "api";
-import { DiffPicturesContainer, PictureInfo } from "components";
-import { selectMocksEnabled, toggleMocksEnabled } from "slices";
-import BugReportIcon from "@mui/icons-material/BugReport";
+import { useSelector } from "react-redux";
+import { GameStatus } from "enums";
+import { selectGameStatus } from "slices";
+import { Level, LevelIntro, LevelSummary } from "components";
+import styles from "./FindTheDifferencesRoute.module.scss";
 
 export const FindTheDifferencesRoute = () => {
-  const dispatch = useDispatch();
-  const { data: user } = useGetUserInfoQuery();
-  const { data: balance } = useGetBalanceQuery();
-  const mocksEnabled = useSelector(selectMocksEnabled);
-
-  const onToggleMocksClick = () => {
-    dispatch(toggleMocksEnabled());
-  };
+  const gameStatus = useSelector(selectGameStatus);
 
   return (
     <>
-      <DiffPicturesContainer />
-      <PictureInfo />
-      {process.env.NODE_ENV === "development" && (
-        <>
-          User: {user?.email} <br />
-          Credits: {balance?.credits}
-          <Fab variant="extended" color={mocksEnabled ? "primary" : "error"} onClick={onToggleMocksClick}>
-            <BugReportIcon sx={{ mr: 1 }} />
-            Mocks {mocksEnabled ? "ON" : "OFF"}
-          </Fab>
-        </>
-      )}
+      {gameStatus === GameStatus.Waiting && <LevelIntro />}
+      {gameStatus === GameStatus.Playing && <Level />}
+      {gameStatus === GameStatus.Won || (gameStatus === GameStatus.Lost && <LevelSummary />)}
     </>
   );
 };

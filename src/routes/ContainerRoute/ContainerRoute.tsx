@@ -86,7 +86,7 @@ export const ContainerRoute = () => {
       </AnimatePresence>
       <AnimatePresence mode="wait">
         <motion.div
-          className={styles.outletWrapper}
+          className={styles.outletWrapper} // TODO direct children have common css, extract to parent
           key={location.pathname}
           variants={variants}
           initial="hidden"

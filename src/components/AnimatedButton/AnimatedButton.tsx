@@ -5,8 +5,8 @@ import styles from "./AnimatedButton.module.scss";
 
 export const AnimatedButton = ({ children }: { children: ReactNode }) => {
   const colorMotionValue = usePrimaryColor();
-  const boxShadow = useMotionTemplate`0 0 50px ${colorMotionValue}, 0 0 0 ${colorMotionValue}`;
   const color = useMotionTemplate`${colorMotionValue}`;
+  const boxShadow = useMotionTemplate`0 0 50px ${colorMotionValue}, 0 0 0 ${colorMotionValue}`;
 
   return (
     <motion.button

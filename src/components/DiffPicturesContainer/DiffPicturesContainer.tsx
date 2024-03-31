@@ -1,16 +1,16 @@
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { selectCurrentCircles, setCircleClickedById } from "slices";
+import { selectDifferences, setDifferenceClickedById } from "slices";
 import { useGeneratePicsMutation } from "api";
 import { InpaintMask } from "components";
 import { Style } from "enums";
-import styles from "./DiffPicturesContainer.module.scss";
 import { MaskCircle } from "interfaces";
+import styles from "./DiffPicturesContainer.module.scss";
 
 export const DiffPicturesContainer = () => {
   const dispatch = useDispatch();
   const [generatePics, generatedPics] = useGeneratePicsMutation();
-  const currentCircles = useSelector(selectCurrentCircles);
+  const currentCircles = useSelector(selectDifferences);
   const [mask, setMask] = useState<string>();
   const canvasOriginalRef = useRef<HTMLCanvasElement>(null);
   const canvasMaskedRef = useRef<HTMLCanvasElement>(null);
@@ -48,7 +48,7 @@ export const DiffPicturesContainer = () => {
       if (canvasMaskedRef.current) {
         drawCircle(canvasMaskedRef.current, clickedCircle);
       }
-      dispatch(setCircleClickedById(clickedCircle.id));
+      dispatch(setDifferenceClickedById(clickedCircle.id));
     } else {
       // Lose 1 life TODO
     }

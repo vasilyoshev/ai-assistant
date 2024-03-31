@@ -10,9 +10,6 @@ export const api = createApi({
     baseUrl: process.env.REACT_APP_API_BASE_URL,
   }),
   endpoints: (builder) => ({
-    getUserInfo: builder.query<User, void>({
-      query: () => "user/account",
-    }),
     getBalance: builder.query<Balance, void>({
       query: () => "user/balance",
     }),
@@ -34,4 +31,4 @@ export const api = createApi({
   }),
 });
 
-export const { useGetUserInfoQuery, useGetBalanceQuery, useGeneratePicsMutation } = api;
+export const { useGetBalanceQuery, useGeneratePicsMutation } = api;
