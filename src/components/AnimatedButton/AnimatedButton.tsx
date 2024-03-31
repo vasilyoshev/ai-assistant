@@ -1,9 +1,15 @@
-import { ReactNode } from "react";
+import { MouseEventHandler, ReactNode } from "react";
 import { motion } from "framer-motion";
 import { useMotionStyle } from "hooks";
 import styles from "./AnimatedButton.module.scss";
 
-export const AnimatedButton = ({ children }: { children: ReactNode }) => {
+export const AnimatedButton = ({
+  children,
+  onClick,
+}: {
+  children: ReactNode;
+  onClick?: MouseEventHandler<HTMLButtonElement>;
+}) => {
   const { motionStyle } = useMotionStyle();
 
   return (
@@ -14,6 +20,7 @@ export const AnimatedButton = ({ children }: { children: ReactNode }) => {
       whileTap={{ scale: 0.9 }}
       initial="hidden"
       animate="visible"
+      onClick={onClick}
     >
       <motion.span className={styles.text}>{children}</motion.span>
     </motion.button>

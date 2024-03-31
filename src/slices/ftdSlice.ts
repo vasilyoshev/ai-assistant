@@ -38,15 +38,21 @@ export const ftdSlice = createSlice({
         circle.isClicked = true;
       }
     },
+    setGameStatus: (state, action: PayloadAction<GameStatus>) => {
+      state.gameStatus = action.payload;
+    },
+    setTopic: (state, action: PayloadAction<string>) => {
+      state.topic = action.payload;
+    },
   },
 });
 
-export const { saveDifferences, setDifferenceClickedById } = ftdSlice.actions;
+export const { saveDifferences, setDifferenceClickedById, setGameStatus, setTopic } = ftdSlice.actions;
 
-export const selectDifferences = (state: RootState) => state.ftd.differences;
 export const selectGameStatus = (state: RootState) => state.ftd.gameStatus;
 export const selectLevel = (state: RootState) => state.ftd.level;
 export const selectLives = (state: RootState) => state.ftd.lives;
+export const selectDifferences = (state: RootState) => state.ftd.differences;
 export const selectMaxDifferenceRadius = (state: RootState) => state.ftd.maxDifferenceRadius;
 export const selectDifferencesCount = (state: RootState) => state.ftd.differencesCount;
 export const selectStyle = (state: RootState) => state.ftd.style;

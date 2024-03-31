@@ -12,8 +12,32 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-evenly;
   width: 90%;
   height: 70%;
   margin-top: $titleHeight + 30px; // TODO describe $titleHeight var usage in readme
+  font-size: 18px;
+}
+
+.gameName {
+  font-size: 50px;
+  text-align: center;
+}
+
+.level {
+  font-size: 30px;
+}
+
+.topicInput {
+  height: 30px;
+  padding-left: 10px;
+  background-color: transparent;
+  outline: none;
+  border: none;
+  font-size: 18px;
+
+  &::placeholder {
+    color: white;
+    opacity: 0.8;
+  }
 }
