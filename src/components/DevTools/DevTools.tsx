@@ -1,7 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Fab } from "@mui/material";
-import { selectMocksEnabled, toggleMocksEnabled } from "slices";
+import { selectMocksEnabled, setGameStatus, toggleMocksEnabled } from "slices";
 import { useGetBalanceQuery } from "api";
+import { GameStatus } from "enums";
 import styles from "./DevTools.module.scss";
 
 export const DevTools = () => {
@@ -13,17 +14,21 @@ export const DevTools = () => {
     dispatch(toggleMocksEnabled());
   };
 
+  const winGame = () => {
+    dispatch(setGameStatus(GameStatus.Won))
+  }
+
   return (
     process.env.NODE_ENV === "development" && (
-      <Fab
-        className={styles.mocksButton}
-        variant="extended"
-        color={mocksEnabled ? "primary" : "error"}
-        onClick={onToggleMocksClick}
-      >
-        Mocks {mocksEnabled ? "ON" : "OFF"} <br />
-        Credits: {balance?.credits.toFixed(2)}
-      </Fab>
+      <div className={styles.mocksButton}>
+        <Fab variant="extended" onClick={winGame}>
+          Win game
+        </Fab>
+        <Fab variant="extended" color={mocksEnabled ? "primary" : "error"} onClick={onToggleMocksClick}>
+          Mocks {mocksEnabled ? "ON" : "OFF"} <br />
+          Credits: {balance?.credits.toFixed(2)}
+        </Fab>
+      </div>
     )
   );
 };
