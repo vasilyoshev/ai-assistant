@@ -1,16 +1,14 @@
-import { motion, useMotionTemplate } from "framer-motion";
-import { usePrimaryColor } from "utils";
+import { motion } from "framer-motion";
 import { DevTools } from "components";
+import { useMotionStyle } from "hooks";
 import styles from "./LevelIntro.module.scss";
 
 export const LevelIntro = () => {
-  const colorMotionValue = usePrimaryColor();
-  const boxShadow = useMotionTemplate`0 0 50px ${colorMotionValue}, 0 0 0 ${colorMotionValue}`;
-  const color = useMotionTemplate`${colorMotionValue}`;
+  const { motionStyle } = useMotionStyle();
 
   return (
     <div className={styles.wrapper}>
-      <motion.div style={{ boxShadow, color }} className={styles.introWindow}>
+      <motion.div style={{ boxShadow: motionStyle.boxShadow }} className={styles.introWindow}>
         LevelIntro
         <DevTools />
       </motion.div>

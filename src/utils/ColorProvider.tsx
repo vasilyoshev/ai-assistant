@@ -3,7 +3,7 @@ import { createContext, useContext, useEffect, ReactNode } from "react";
 import { useMotionValue, animate, MotionValue } from "framer-motion";
 
 const PrimaryColorContext = createContext<MotionValue<string>>(null);
-const COLORS_TOP = ["#13FFAA", "#1E67C6", "#CE84CF", "#DD335C"];
+const COLORS_TOP = ["#454ADE", "#B00772", "#E05200", "#F4B02A", "#306B34"];
 
 export const usePrimaryColor = () => useContext(PrimaryColorContext);
 

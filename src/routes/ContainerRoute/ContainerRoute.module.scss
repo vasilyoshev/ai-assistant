@@ -1,6 +1,9 @@
+@import "variables";
+
 .name {
   position: absolute;
   color: white;
+  height: $titleHeight;
 }
 
 .outletWrapper {

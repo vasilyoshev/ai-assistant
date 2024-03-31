@@ -1,10 +1,11 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
-import { AnimatePresence, animate, motion, useMotionTemplate, useMotionValue, useSpring } from "framer-motion";
+import { AnimatePresence, animate, motion, useMotionValue } from "framer-motion";
 import { selectIsInitialLoad, toggleOffIsInitialLoad } from "slices";
-import { AnimatedOutlet, usePrimaryColor } from "utils";
+import { AnimatedOutlet } from "utils";
 import { initialAnimationDelay } from "consts";
+import { useMotionStyle } from "hooks";
 import styles from "./ContainerRoute.module.scss";
 
 // eslint-disable-next-line max-len
@@ -14,8 +15,6 @@ export const ContainerRoute = () => {
   const dispatch = useDispatch();
   const location = useLocation();
   const isInitialLoad = useSelector(selectIsInitialLoad);
-  const colorMotionValue = usePrimaryColor();
-  const textColor = useMotionTemplate`${colorMotionValue}`;
   const titleMarginTop = useMotionValue("30px");
   const titleLeft = useMotionValue("50%");
   const titleTransform = useMotionValue("translate(-50%, 0)");
@@ -27,6 +26,7 @@ export const ContainerRoute = () => {
   const initialRouteDelay = initialAnimationDelay + 0.2;
   const transitionRouteDelay = 0.1;
   const titleOpacity = useMotionValue(initialOpacity);
+  const { motionStyle } = useMotionStyle();
 
   const titleStyle = {
     marginTop: titleMarginTop,
@@ -64,7 +64,7 @@ export const ContainerRoute = () => {
         animate(titleMarginTop, "0px", { duration: 0.5 });
         animate(titleLeft, "100%", { duration: 0.5 });
         animate(titleTransform, "translate(-110%, 0)", { duration: 0.5 });
-        animate(titleFontSize, "40px", { duration: 0.5 });
+        animate(titleFontSize, "37px", { duration: 0.5 });
         break;
       default:
         animate(titleMarginTop, "30px", { duration: 0.5 });
@@ -80,13 +80,14 @@ export const ContainerRoute = () => {
       <AnimatePresence mode="wait">
         <Link to="/">
           <motion.span className={styles.name} style={titleStyle}>
-            pl<motion.span style={{ color: textColor }}>AI</motion.span>box
+            pl<motion.span style={{ color: motionStyle.color }}>AI</motion.span>box
           </motion.span>
         </Link>
       </AnimatePresence>
       <AnimatePresence mode="wait">
         <motion.div
           className={styles.outletWrapper} // TODO direct children have common css, extract to parent
+          style={{ color: motionStyle.color }}
           key={location.pathname}
           variants={variants}
           initial="hidden"
