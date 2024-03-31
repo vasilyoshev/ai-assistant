@@ -6,3 +6,4 @@ export * from "./LevelIntro";
 export * from "./Level";
 export * from "./LevelSummary";
 export * from "./DevTools";
+export * from "./YTPlayer";
