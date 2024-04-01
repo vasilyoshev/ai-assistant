@@ -1,23 +1,19 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { selectDifferences, setDifferenceClickedById } from "slices";
-import { useGeneratePicsMutation } from "api";
-import { InpaintMask } from "components";
-import { Style } from "enums";
-import { MaskCircle } from "interfaces";
+import { loseLife, selectDifferences, selectLives, setDifferenceClickedById, setGameStatus } from "slices";
+import { GameStatus } from "enums";
+import { MaskCircle, PicturesResponse } from "interfaces";
 import styles from "./DiffPicturesContainer.module.scss";
 
-export const DiffPicturesContainer = () => {
+interface DiffPicturesContainerProps {
+  generatedPics: PicturesResponse;
+}
+export const DiffPicturesContainer = ({ generatedPics }: DiffPicturesContainerProps) => {
   const dispatch = useDispatch();
-  const [generatePics, generatedPics] = useGeneratePicsMutation();
   const currentCircles = useSelector(selectDifferences);
-  const [mask, setMask] = useState<string>();
+  const lives = useSelector(selectLives);
   const canvasOriginalRef = useRef<HTMLCanvasElement>(null);
   const canvasMaskedRef = useRef<HTMLCanvasElement>(null);
-
-  const onMaskGenerated = (canvas: HTMLCanvasElement) => {
-    setMask(canvas.toDataURL().split(",")[1]);
-  };
 
   // TODO try animations and extract to separate component
   const drawCircle = (canvas: HTMLCanvasElement, circle: MaskCircle) => {
@@ -50,9 +46,15 @@ export const DiffPicturesContainer = () => {
       }
       dispatch(setDifferenceClickedById(clickedCircle.id));
     } else {
-      // Lose 1 life TODO
+      if (!clickedCircle?.isClicked) dispatch(loseLife());
     }
   };
+
+  useEffect(() => {
+    if (lives === 0) {
+      dispatch(setGameStatus(GameStatus.Lost));
+    }
+  }, [lives]);
 
   useEffect(() => {
     if (canvasOriginalRef.current && canvasMaskedRef.current) {
@@ -61,37 +63,26 @@ export const DiffPicturesContainer = () => {
       canvasMaskedRef.current.height = 1024;
       canvasMaskedRef.current.width = 1024;
     }
-  }, [generatedPics.isSuccess]);
-
-  useEffect(() => {
-    if (!mask) return;
-
-    generatePics({ maskImage: mask, style: Style.Neonpunk, topic: "city" });
-  }, [mask]);
+  }, []);
 
   return (
     <div className={styles.wrapper}>
-      {generatedPics.isSuccess && (
-        <>
-          <div className={styles.imgContainer}>
-            <img
-              src={`data:image/png;base64, ${generatedPics.data?.originalPic.artifacts[0].base64}`}
-              alt="original"
-              className={styles.image}
-            />
-            <canvas ref={canvasOriginalRef} className={styles.overlayCanvas} onClick={onCanvasClick} />
-          </div>
-          <div className={styles.imgContainer}>
-            <img
-              src={`data:image/png;base64, ${generatedPics.data?.maskedPic.artifacts[0].base64}`}
-              alt="inpainted"
-              className={styles.image}
-            />
-            <canvas ref={canvasMaskedRef} className={styles.overlayCanvas} onClick={onCanvasClick} />
-          </div>
-        </>
-      )}
-      <InpaintMask onMaskGenerated={onMaskGenerated} />
+      <div className={styles.imgContainer}>
+        <img
+          src={`data:image/png;base64, ${generatedPics.originalPic.artifacts[0].base64}`}
+          alt="original"
+          className={styles.image}
+        />
+        <canvas ref={canvasOriginalRef} className={styles.overlayCanvas} onClick={onCanvasClick} />
+      </div>
+      <div className={styles.imgContainer}>
+        <img
+          src={`data:image/png;base64, ${generatedPics.maskedPic.artifacts[0].base64}`}
+          alt="inpainted"
+          className={styles.image}
+        />
+        <canvas ref={canvasMaskedRef} className={styles.overlayCanvas} onClick={onCanvasClick} />
+      </div>
     </div>
   );
 };

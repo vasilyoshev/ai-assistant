@@ -7,3 +7,5 @@ export * from "./Level";
 export * from "./LevelSummary";
 export * from "./DevTools";
 export * from "./YTPlayer";
+export * from "./Rating";
+export * from "./Spinner";
