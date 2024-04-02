@@ -1,26 +1,3 @@
-@import "variables";
-
-.wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  flex: 1;
-}
-
-.introWindow {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-evenly;
-  border-radius: 50px;
-  width: 90%;
-  height: 70%;
-  margin-top: $titleHeight + 30px; // TODO describe $titleHeight var usage in readme
-  font-size: 18px;
-  text-align: center;
-}
-
 .gameName {
   font-size: 50px;
   text-align: center;
