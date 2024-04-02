@@ -7,7 +7,7 @@ export const useMotionStyle = () => {
   const motionStyle: MotionStyle = {};
 
   motionStyle.color = useMotionTemplate`${colorMotionValue}`;
-  motionStyle.boxShadow = useMotionTemplate`0 0 50px ${colorMotionValue}, 0 0 0 ${colorMotionValue}`;
+  motionStyle.boxShadow = useMotionTemplate`0 0 15px ${colorMotionValue}, 0 0 0 ${colorMotionValue}`;
 
   return { motionStyle };
 };

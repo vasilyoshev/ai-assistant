@@ -44,13 +44,17 @@ export const ftdSlice = createSlice({
     setTopic: (state, action: PayloadAction<string>) => {
       state.topic = action.payload;
     },
+    setStyle: (state, action: PayloadAction<Style>) => {
+      state.style = action.payload;
+    },
     loseLife: (state) => {
       state.lives--;
     },
   },
 });
 
-export const { saveDifferences, setDifferenceClickedById, setGameStatus, setTopic, loseLife } = ftdSlice.actions;
+export const { saveDifferences, setDifferenceClickedById, setGameStatus, setTopic, setStyle, loseLife } =
+  ftdSlice.actions;
 
 export const selectGameStatus = (state: RootState) => state.ftd.gameStatus;
 export const selectLevel = (state: RootState) => state.ftd.level;

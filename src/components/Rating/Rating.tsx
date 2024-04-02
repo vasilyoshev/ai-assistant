@@ -20,15 +20,17 @@ export const Rating = ({ type, totalItems, checkedItems }: RatingProps) => {
 
   useEffect(() => {
     if (checkedItems > prevCheckedItems) {
+      const scale = (i: number) => i === prevCheckedItems ? 2 : 1;
       animationControls.start((i) => ({
-        scale: [1, i === prevCheckedItems ? 1.5 : 1, 1],
+        scale: [1, scale(i), 1, scale(i), 1],
         rotate: [0, i === prevCheckedItems ? 360 : 0],
-        transition: { duration: 0.5 },
+        transition: { duration: 1 },
       }));
     } else if (checkedItems < prevCheckedItems) {
+      const scale = (i: number) => i === checkedItems ? 2 : 1;
       animationControls.start((i) => ({
-        scale: [1, i === checkedItems ? 1.5 : 1, 1],
-        transition: { duration: 0.5 },
+        scale: [1, scale(i), 1, scale(i), 1],
+        transition: { duration: 1 },
       }));
     }
   }, [checkedItems]);
