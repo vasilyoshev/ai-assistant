@@ -6,3 +6,5 @@ export * from "./AppRouter";
 export * from "./usePrevious";
 export * from "./getRandomTopic";
 export * from "./getRandomStyle";
+export * from "./getNumberOfDifferences";
+export * from "./getMaxDifferenceRadius";

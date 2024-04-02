@@ -1,6 +1,6 @@
 @import "variables";
 
-.introWindow {
+.container {
   position: relative;
   align-self: center;
   display: flex;
@@ -9,8 +9,8 @@
   justify-content: space-evenly;
   border-radius: 50px;
   width: 90%;
-  height: 70%;
-  margin-top: $titleHeight + 30px; // TODO describe $titleHeight var usage in readme
+  height: 87%;
+  margin-top: 65px;
   font-size: 18px;
   text-align: center;
 }

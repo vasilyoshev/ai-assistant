@@ -10,7 +10,7 @@ export const LevelInfoWrapper = ({ children }: LevelInfoWrapperProps) => {
   const { motionStyle } = useMotionStyle();
 
   return (
-    <motion.div style={{ boxShadow: motionStyle.boxShadow }} className={styles.introWindow}>
+    <motion.div style={{ boxShadow: motionStyle.boxShadow }} className={styles.container}>
       {children}
     </motion.div>
   );

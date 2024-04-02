@@ -15,12 +15,19 @@ export const DevTools = () => {
   };
 
   const winGame = () => {
-    dispatch(setGameStatus(GameStatus.Won))
-  }
+    dispatch(setGameStatus(GameStatus.GameWon));
+  };
+
+  const clearLevel = () => {
+    dispatch(setGameStatus(GameStatus.LevelCleared));
+  };
 
   return (
     process.env.NODE_ENV === "development" && (
       <div className={styles.mocksButton}>
+        <Fab variant="extended" onClick={clearLevel}>
+          Clear level
+        </Fab>
         <Fab variant="extended" onClick={winGame}>
           Win game
         </Fab>

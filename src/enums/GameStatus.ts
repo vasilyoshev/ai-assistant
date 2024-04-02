@@ -1,6 +1,7 @@
 export enum GameStatus {
   Waiting = "Waiting",
   Playing = "Playing",
-  Won = "Won",
-  Lost = "Lost",
+  LevelCleared = "LevelCleared",
+  LevelFailed = "LevelFailed",
+  GameWon = "GameWon",
 }

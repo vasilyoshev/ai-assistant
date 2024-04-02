@@ -8,8 +8,6 @@ export interface FtdState {
   level: number;
   lives: number;
   differences: MaskCircle[];
-  maxDifferenceRadius: number;
-  differencesCount: number;
   style: Style;
   topic: string;
 }
@@ -19,9 +17,7 @@ const initialState: FtdState = {
   level: 1,
   lives: 3,
   differences: [],
-  maxDifferenceRadius: 150,
-  differencesCount: 3,
-  style: Style.DigitalArt,
+  style: undefined,
   topic: undefined,
 };
 
@@ -29,7 +25,16 @@ export const ftdSlice = createSlice({
   name: "ftd",
   initialState,
   reducers: {
-    saveDifferences: (state, action: PayloadAction<MaskCircle[]>) => {
+    setGameStatus: (state, action: PayloadAction<GameStatus>) => {
+      state.gameStatus = action.payload;
+    },
+    levelUp: (state) => {
+      state.level++;
+    },
+    loseLife: (state) => {
+      state.lives--;
+    },
+    setDifferences: (state, action: PayloadAction<MaskCircle[]>) => {
       state.differences = action.payload;
     },
     setDifferenceClickedById: (state, action: PayloadAction<number>) => {
@@ -38,30 +43,42 @@ export const ftdSlice = createSlice({
         circle.isClicked = true;
       }
     },
-    setGameStatus: (state, action: PayloadAction<GameStatus>) => {
-      state.gameStatus = action.payload;
+    setStyle: (state, action: PayloadAction<Style>) => {
+      state.style = action.payload;
     },
     setTopic: (state, action: PayloadAction<string>) => {
       state.topic = action.payload;
     },
-    setStyle: (state, action: PayloadAction<Style>) => {
-      state.style = action.payload;
+    resetLevelState: (state) => {
+      state.gameStatus = initialState.gameStatus;
+      state.lives = initialState.lives;
+      state.differences = initialState.differences;
     },
-    loseLife: (state) => {
-      state.lives--;
+    resetGameState: (state) => {
+      state.gameStatus = initialState.gameStatus;
+      state.lives = initialState.lives;
+      state.differences = initialState.differences;
+      state.level = initialState.level;
     },
   },
 });
 
-export const { saveDifferences, setDifferenceClickedById, setGameStatus, setTopic, setStyle, loseLife } =
-  ftdSlice.actions;
+export const {
+  setGameStatus,
+  levelUp,
+  loseLife,
+  setDifferences,
+  setDifferenceClickedById,
+  setStyle,
+  setTopic,
+  resetLevelState,
+  resetGameState,
+} = ftdSlice.actions;
 
 export const selectGameStatus = (state: RootState) => state.ftd.gameStatus;
 export const selectLevel = (state: RootState) => state.ftd.level;
 export const selectLives = (state: RootState) => state.ftd.lives;
 export const selectDifferences = (state: RootState) => state.ftd.differences;
-export const selectMaxDifferenceRadius = (state: RootState) => state.ftd.maxDifferenceRadius;
-export const selectDifferencesCount = (state: RootState) => state.ftd.differencesCount;
 export const selectStyle = (state: RootState) => state.ftd.style;
 export const selectTopic = (state: RootState) => state.ftd.topic;
 

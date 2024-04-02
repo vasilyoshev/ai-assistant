@@ -10,14 +10,14 @@ export const App = () => {
   const gradientMotionValue = useMotionValue(0);
   const backgroundImage = useMotionTemplate`
     radial-gradient(
-      ${gradientMotionValue}% 100% at 50% 30%, 
-      #020617 60%, 
+      ${gradientMotionValue}% 80% at 50% 50%, 
+      #020617 80%, 
       ${colorMotionValue}
     )
   `;
 
   useEffect(() => {
-    animate(gradientMotionValue, 150, {
+    animate(gradientMotionValue, 80, {
       ease: "easeInOut",
       duration: 0.5,
       delay: initialAnimationDelay,

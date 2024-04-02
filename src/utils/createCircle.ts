@@ -1,8 +1,9 @@
 import { MaskCircle } from "interfaces";
+import { getMaxDifferenceRadius } from "utils";
 
-export const createCircle = (circles: MaskCircle[], id: number): MaskCircle => {
+export const createCircle = (circles: MaskCircle[], id: number, level: number): MaskCircle => {
   const minRadius = 30;
-  const maxRadius = 150;
+  const maxRadius = getMaxDifferenceRadius(level);
   const canvasWidth = 1024;
   const canvasHeight = 1024;
   let newCircle;

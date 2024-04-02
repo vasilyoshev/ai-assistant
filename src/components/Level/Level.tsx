@@ -1,13 +1,16 @@
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { DiffPicturesContainer, InpaintMask, Rating, Spinner } from "components";
-import { selectDifferences, selectLives, selectStyle, selectTopic } from "slices";
+import { selectDifferences, selectLevel, selectLives, selectStyle, selectTopic, setGameStatus } from "slices";
 import { useGeneratePicsMutation } from "api";
 import styles from "./Level.module.scss";
+import { GameStatus } from "enums";
 
 export const Level = () => {
+  const dispatch = useDispatch();
   const [generatePics, generatedPics] = useGeneratePicsMutation();
   const lives = useSelector(selectLives);
+  const level = useSelector(selectLevel);
   const differences = useSelector(selectDifferences);
   const topic = useSelector(selectTopic);
   const style = useSelector(selectStyle);
@@ -23,6 +26,12 @@ export const Level = () => {
 
     generatePics({ maskImage: mask, style, topic });
   }, [mask]);
+
+  useEffect(() => {
+    if (differences?.length && foundDifferences?.length && differences.length === foundDifferences.length) {
+      dispatch(setGameStatus(level === 10 ? GameStatus.GameWon : GameStatus.LevelCleared));
+    }
+  }, [differences, foundDifferences]);
 
   return (
     <div className={styles.wrapper}>

@@ -1,8 +1,7 @@
 import { useSelector } from "react-redux";
 import { GameStatus } from "enums";
 import { selectGameStatus } from "slices";
-import { Level, LevelIntro, LevelSummary } from "components";
-import styles from "./FindTheDifferencesRoute.module.scss";
+import { GameWon, Level, LevelCleared, LevelFailed, LevelIntro } from "components";
 
 export const FindTheDifferencesRoute = () => {
   const gameStatus = useSelector(selectGameStatus);
@@ -11,7 +10,9 @@ export const FindTheDifferencesRoute = () => {
     <>
       {gameStatus === GameStatus.Waiting && <LevelIntro />}
       {gameStatus === GameStatus.Playing && <Level />}
-      {gameStatus === GameStatus.Won || (gameStatus === GameStatus.Lost && <LevelSummary />)}
+      {gameStatus === GameStatus.LevelCleared && <LevelCleared />}
+      {gameStatus === GameStatus.LevelFailed && <LevelFailed />}
+      {gameStatus === GameStatus.GameWon && <GameWon />}
     </>
   );
 };

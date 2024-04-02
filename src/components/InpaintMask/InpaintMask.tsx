@@ -1,8 +1,8 @@
 import { FunctionComponent, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { MaskCircle } from "interfaces";
-import { createCircle } from "utils";
-import { saveDifferences, selectMocksEnabled } from "slices";
+import { createCircle, getNumberOfDifferences } from "utils";
+import { setDifferences, selectMocksEnabled, selectLevel } from "slices";
 import { mockCircles } from "mocks";
 import styles from "./InpaintMask.module.scss";
 
@@ -12,6 +12,7 @@ export const InpaintMask: FunctionComponent<{
   const maskRef = useRef<HTMLCanvasElement>(null);
   const dispatch = useDispatch();
   const mocksEnabled = useSelector(selectMocksEnabled);
+  const level = useSelector(selectLevel);
 
   useEffect(() => {
     const canvas = maskRef.current;
@@ -24,13 +25,13 @@ export const InpaintMask: FunctionComponent<{
     context.fillRect(0, 0, canvas.width, canvas.height);
 
     const circles: MaskCircle[] = [];
-    const numberOfCircles = 5;
+    const numberOfDifferences = getNumberOfDifferences(level);
 
     if (mocksEnabled) {
       circles.push(...mockCircles);
     } else {
-      for (let i = 0; i < numberOfCircles; i++) {
-        const circle = createCircle(circles, i + 1);
+      for (let i = 0; i < numberOfDifferences; i++) {
+        const circle = createCircle(circles, i + 1, level);
         circles.push(circle);
         context.beginPath();
         context.arc(circle.x, circle.y, circle.radius, 0, 2 * Math.PI);
@@ -41,7 +42,7 @@ export const InpaintMask: FunctionComponent<{
     }
 
     onMaskGenerated(canvas);
-    dispatch(saveDifferences(circles));
+    dispatch(setDifferences(circles));
   }, []);
 
   return <canvas className={styles.canvas} ref={maskRef} width="1024" height="1024"></canvas>;

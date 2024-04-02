@@ -52,7 +52,7 @@ export const DiffPicturesContainer = ({ generatedPics }: DiffPicturesContainerPr
 
   useEffect(() => {
     if (lives === 0) {
-      dispatch(setGameStatus(GameStatus.Lost));
+      dispatch(setGameStatus(GameStatus.LevelFailed));
     }
   }, [lives]);
 
