@@ -8,3 +8,4 @@ export * from "./getRandomTopic";
 export * from "./getRandomStyle";
 export * from "./getNumberOfDifferences";
 export * from "./getMaxDifferenceRadius";
+export * from "./difficultyToLivesMap";

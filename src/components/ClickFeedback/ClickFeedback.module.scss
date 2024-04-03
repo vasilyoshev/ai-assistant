@@ -1,0 +1,10 @@
+.cursorEffect {
+  position: fixed;
+  pointer-events: none;
+
+  path {
+    stroke-width: 16px;
+    stroke-linecap: round;
+    fill: transparent;
+  }
+}

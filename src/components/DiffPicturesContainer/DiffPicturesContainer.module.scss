@@ -8,9 +8,10 @@
 
   .imgContainer {
     position: relative;
+    display: flex;
     margin: 5px;
     overflow: auto;
-    display: flex;
+    user-select: none;
 
     .image,
     .overlayCanvas {

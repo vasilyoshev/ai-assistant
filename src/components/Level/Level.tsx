@@ -1,10 +1,19 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { DiffPicturesContainer, InpaintMask, Rating, Spinner } from "components";
-import { selectDifferences, selectLevel, selectLives, selectStyle, selectTopic, setGameStatus } from "slices";
+import {
+  selectDifferences,
+  selectDifficulty,
+  selectLevel,
+  selectLives,
+  selectStyle,
+  selectTopic,
+  setGameStatus,
+} from "slices";
 import { useGeneratePicsMutation } from "api";
-import styles from "./Level.module.scss";
 import { GameStatus } from "enums";
+import { difficultyToLivesMap } from "utils";
+import styles from "./Level.module.scss";
 
 export const Level = () => {
   const dispatch = useDispatch();
@@ -12,6 +21,7 @@ export const Level = () => {
   const lives = useSelector(selectLives);
   const level = useSelector(selectLevel);
   const differences = useSelector(selectDifferences);
+  const difficulty = useSelector(selectDifficulty);
   const topic = useSelector(selectTopic);
   const style = useSelector(selectStyle);
   const [mask, setMask] = useState<string>();
@@ -39,7 +49,7 @@ export const Level = () => {
       {generatedPics.isSuccess && (
         <>
           <Rating type="star" totalItems={differences.length} checkedItems={foundDifferences.length} />
-          <Rating type="heart" totalItems={3} checkedItems={lives} />
+          <Rating type="heart" totalItems={difficultyToLivesMap[difficulty]} checkedItems={lives} />
           <DiffPicturesContainer generatedPics={generatedPics.data} />
         </>
       )}

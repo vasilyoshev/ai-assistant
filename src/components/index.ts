@@ -13,3 +13,4 @@ export * from "./LevelFailed";
 export * from "./LevelCleared";
 export * from "./GameWon";
 export * from "./DifficultySelector";
+export * from "./ClickFeedback";

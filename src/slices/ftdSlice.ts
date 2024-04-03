@@ -1,6 +1,7 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { Difficulty, GameStatus, Style } from "enums";
 import { MaskCircle } from "interfaces";
+import { difficultyToLivesMap } from "utils";
 import { RootState } from "store";
 
 export interface FtdState {
@@ -13,10 +14,10 @@ export interface FtdState {
   difficulty: Difficulty;
 }
 
-const initialState: FtdState = {
+export const initialState: FtdState = {
   gameStatus: GameStatus.Waiting,
   level: 1,
-  lives: 3,
+  lives: 5,
   differences: [],
   style: undefined,
   topic: undefined,
@@ -60,10 +61,11 @@ export const ftdSlice = createSlice({
       state.gameStatus = initialState.gameStatus;
       state.lives = initialState.lives;
       state.differences = initialState.differences;
-      state.level = initialState.level;
+      state.level = difficultyToLivesMap[state.difficulty];
     },
     setDifficulty: (state, action: PayloadAction<Difficulty>) => {
       state.difficulty = action.payload;
+      state.lives = difficultyToLivesMap[state.difficulty];
     },
   },
 });
