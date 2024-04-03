@@ -4,15 +4,13 @@ import { AnimatePresence, domAnimation, LazyMotion, motion } from "framer-motion
 import { useMotionStyle } from "hooks";
 import { selectDifficulty, setDifficulty } from "slices";
 import { AnimatedButton } from "components";
-import styles from "./DifficultySelector.module.scss";
-import { usePrimaryColor } from "utils";
 import { Difficulty } from "enums";
+import styles from "./DifficultySelector.module.scss";
 
 export const DifficultySelector = () => {
   const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState<Boolean>(false);
   const { motionStyle } = useMotionStyle();
-  const colorMotionValue = usePrimaryColor();
   const difficulty = useSelector(selectDifficulty);
 
   const handleItemClick = (selectedDifficulty: Difficulty) => {
@@ -23,21 +21,7 @@ export const DifficultySelector = () => {
   return (
     <LazyMotion features={domAnimation}>
       <motion.div className={styles.wrapper}>
-        <AnimatedButton onClick={() => setIsOpen(!isOpen)}>
-          Difficulty: {difficulty}
-          <motion.svg className={styles.svg}>
-            <motion.path
-              fill="transparent"
-              strokeWidth="2"
-              strokeLinecap="round"
-              animate={isOpen ? "down" : "up"}
-              variants={{
-                up: { d: "M 12 16 L 16 20 L 20 16", stroke: colorMotionValue.get() },
-                down: { d: "M 12 16 L 16 12 L 20 16", stroke: colorMotionValue.get() },
-              }}
-            />
-          </motion.svg>
-        </AnimatedButton>
+        <AnimatedButton onClick={() => setIsOpen(!isOpen)}>Difficulty: {difficulty}</AnimatedButton>
         <AnimatePresence>
           {isOpen && (
             <motion.div
