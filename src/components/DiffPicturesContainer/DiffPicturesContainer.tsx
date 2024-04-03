@@ -19,11 +19,21 @@ export const DiffPicturesContainer = ({ generatedPics }: DiffPicturesContainerPr
   const drawCircle = (canvas: HTMLCanvasElement, circle: MaskCircle) => {
     const ctx = canvas.getContext("2d");
     if (ctx) {
-      ctx.beginPath();
-      ctx.arc(circle.x, circle.y, circle.radius, 0, 2 * Math.PI);
-      ctx.strokeStyle = "red";
-      ctx.lineWidth = 3;
-      ctx.stroke();
+      const quart = Math.PI / 2;
+      const circ = Math.PI * 2;
+      let percentage = 0;
+      const draw = () => {
+        ctx.beginPath();
+        ctx.arc(circle.x, circle.y, circle.radius, -quart, circ * (percentage / 100) - quart, false);
+        ctx.strokeStyle = "green";
+        ctx.lineWidth = 5;
+        ctx.stroke();
+
+        percentage = percentage + 2;
+
+        if (percentage <= 100) requestAnimationFrame(draw);
+      };
+      draw();
     }
   };
 
