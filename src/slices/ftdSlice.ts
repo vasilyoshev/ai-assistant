@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { GameStatus, Style } from "enums";
+import { Difficulty, GameStatus, Style } from "enums";
 import { MaskCircle } from "interfaces";
 import { RootState } from "store";
 
@@ -10,6 +10,7 @@ export interface FtdState {
   differences: MaskCircle[];
   style: Style;
   topic: string;
+  difficulty: Difficulty;
 }
 
 const initialState: FtdState = {
@@ -19,6 +20,7 @@ const initialState: FtdState = {
   differences: [],
   style: undefined,
   topic: undefined,
+  difficulty: Difficulty.Normal,
 };
 
 export const ftdSlice = createSlice({
@@ -60,6 +62,9 @@ export const ftdSlice = createSlice({
       state.differences = initialState.differences;
       state.level = initialState.level;
     },
+    setDifficulty: (state, action: PayloadAction<Difficulty>) => {
+      state.difficulty = action.payload;
+    },
   },
 });
 
@@ -73,6 +78,7 @@ export const {
   setTopic,
   resetLevelState,
   resetGameState,
+  setDifficulty,
 } = ftdSlice.actions;
 
 export const selectGameStatus = (state: RootState) => state.ftd.gameStatus;
@@ -81,5 +87,6 @@ export const selectLives = (state: RootState) => state.ftd.lives;
 export const selectDifferences = (state: RootState) => state.ftd.differences;
 export const selectStyle = (state: RootState) => state.ftd.style;
 export const selectTopic = (state: RootState) => state.ftd.topic;
+export const selectDifficulty = (state: RootState) => state.ftd.difficulty;
 
 export default ftdSlice.reducer;

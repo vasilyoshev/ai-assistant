@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { AnimatedButton, DevTools, LevelInfoWrapper } from "components";
+import { AnimatedButton, DevTools, DifficultySelector, LevelInfoWrapper } from "components";
 import { selectLevel, selectStyle, selectTopic, setGameStatus, setStyle, setTopic } from "slices";
 import { GameStatus } from "enums";
 import { getRandomStyle, getRandomTopic } from "utils";
@@ -30,6 +30,7 @@ export const LevelIntro = () => {
         <div>Style: {style}</div>
         <div>Topic: {topic}</div>
       </div>
+      <DifficultySelector />
       <AnimatedButton onClick={handleStartClick}>Start</AnimatedButton>
     </LevelInfoWrapper>
   );

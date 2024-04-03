@@ -2,7 +2,7 @@ import { FunctionComponent, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { MaskCircle } from "interfaces";
 import { createCircle, getNumberOfDifferences } from "utils";
-import { setDifferences, selectMocksEnabled, selectLevel } from "slices";
+import { setDifferences, selectMocksEnabled, selectLevel, selectDifficulty } from "slices";
 import { mockCircles } from "mocks";
 import styles from "./InpaintMask.module.scss";
 
@@ -13,6 +13,7 @@ export const InpaintMask: FunctionComponent<{
   const dispatch = useDispatch();
   const mocksEnabled = useSelector(selectMocksEnabled);
   const level = useSelector(selectLevel);
+  const difficulty = useSelector(selectDifficulty);
 
   useEffect(() => {
     const canvas = maskRef.current;
@@ -25,13 +26,13 @@ export const InpaintMask: FunctionComponent<{
     context.fillRect(0, 0, canvas.width, canvas.height);
 
     const circles: MaskCircle[] = [];
-    const numberOfDifferences = getNumberOfDifferences(level);
+    const numberOfDifferences = getNumberOfDifferences(level, difficulty);
 
     if (mocksEnabled) {
       circles.push(...mockCircles);
     } else {
       for (let i = 0; i < numberOfDifferences; i++) {
-        const circle = createCircle(circles, i + 1, level);
+        const circle = createCircle(circles, i + 1, level, difficulty);
         circles.push(circle);
         context.beginPath();
         context.arc(circle.x, circle.y, circle.radius, 0, 2 * Math.PI);
