@@ -1,9 +1,9 @@
 import { Difficulty } from "enums";
 import { MaskCircle } from "interfaces";
-import { getMaxDifferenceRadius } from "utils";
+import { getMaxDifferenceRadius, getMinDifferenceRadius } from "utils";
 
 export const createCircle = (circles: MaskCircle[], id: number, level: number, difficulty: Difficulty): MaskCircle => {
-  const minRadius = 30;
+  const minRadius = getMinDifferenceRadius(level, difficulty);
   const maxRadius = getMaxDifferenceRadius(level, difficulty);
   const canvasWidth = 1024;
   const canvasHeight = 1024;

@@ -1,11 +1,12 @@
 import { Difficulty } from "enums";
 
-export const getMaxDifferenceRadius = (level: number, difficulty: Difficulty) => {
+// TODO this and getMinDifferenceRadius can be 1 function
+export const getMinDifferenceRadius = (level: number, difficulty: Difficulty) => {
   
   const x1 = 1; // level 1
   const x2 = 10; // level 10
-  const y1 = 150; // max radius at level 1
-  const y2 = 30; // max radius at level 10
+  const y1 = 100; // min radius at level 1
+  const y2 = 30; // min radius at level 10
   
   if (difficulty === Difficulty.Easy) return y1;
   if (difficulty === Difficulty.Hard) return y2;
