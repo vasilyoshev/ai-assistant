@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { AnimationPlaybackControls, AnimationScope, animate, motion, useAnimate, useMotionValue } from "framer-motion";
+import { AnimationPlaybackControls, motion, useAnimate, useMotionValue } from "framer-motion";
 import styles from "./ClickFeedback.module.scss";
 
 interface ClickFeedbackProps {
@@ -32,7 +32,7 @@ export const ClickFeedback = ({ isCorrect, cursorPosition }: ClickFeedbackProps)
     cursorOpacity.set(1);
     cursorPathLength.set(0);
 
-    const pathLengthAnimation = animate(cursorPathLength, 1, { duration: 0.5 });
+    const pathLengthAnimation = animate(cursorPathLength, 1, { duration: 0.3 });
     const opacityAnimation = animate(cursorOpacity, 0, { duration: 0.5, delay: 0.5 });
 
     setOngoingAnimations([pathLengthAnimation, opacityAnimation]);

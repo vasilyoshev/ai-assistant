@@ -54,14 +54,14 @@ export const ftdSlice = createSlice({
     },
     resetLevelState: (state) => {
       state.gameStatus = initialState.gameStatus;
-      state.lives = initialState.lives;
+      state.lives = difficultyToLivesMap[state.difficulty];
       state.differences = initialState.differences;
     },
     resetGameState: (state) => {
       state.gameStatus = initialState.gameStatus;
-      state.lives = initialState.lives;
+      state.lives = difficultyToLivesMap[state.difficulty];
       state.differences = initialState.differences;
-      state.level = difficultyToLivesMap[state.difficulty];
+      state.level = 1;
     },
     setDifficulty: (state, action: PayloadAction<Difficulty>) => {
       state.difficulty = action.payload;
