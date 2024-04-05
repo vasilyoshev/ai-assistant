@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { loseLife, selectDifferences, setDifferenceClickedById } from "slices";
+import { loseLife, selectDifferences, selectLives, setDifferenceClickedById } from "slices";
 import { ClickFeedback } from "components";
 import { MaskCircle, PicturesResponse } from "interfaces";
 import styles from "./DiffPicturesContainer.module.scss";
@@ -13,11 +13,12 @@ export const DiffPicturesContainer = ({ generatedPics }: DiffPicturesContainerPr
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
   const [isCorrect, setIsCorrect] = useState<boolean>();
   const currentCircles = useSelector(selectDifferences);
+  const lives = useSelector(selectLives);
   const canvasOriginalRef = useRef<HTMLCanvasElement>(null);
   const canvasMaskedRef = useRef<HTMLCanvasElement>(null);
 
   // TODO extract to separate component
-  const drawCircle = (canvas: HTMLCanvasElement, circle: MaskCircle) => {
+  const drawCircle = (canvas: HTMLCanvasElement, circle: MaskCircle, color: "green" | "red") => {
     const ctx = canvas.getContext("2d");
     if (ctx) {
       const quart = Math.PI / 2;
@@ -26,7 +27,7 @@ export const DiffPicturesContainer = ({ generatedPics }: DiffPicturesContainerPr
       const draw = () => {
         ctx.beginPath();
         ctx.arc(circle.x, circle.y, circle.radius, -quart, circ * (percentage / 100) - quart, false);
-        ctx.strokeStyle = "green";
+        ctx.strokeStyle = color;
         ctx.lineWidth = 5;
         ctx.stroke();
 
@@ -50,8 +51,8 @@ export const DiffPicturesContainer = ({ generatedPics }: DiffPicturesContainerPr
 
     if (clickedCircle) {
       if (!clickedCircle.isClicked) {
-        drawCircle(canvasOriginalRef.current, clickedCircle);
-        drawCircle(canvasMaskedRef.current, clickedCircle);
+        drawCircle(canvasOriginalRef.current, clickedCircle, 'green');
+        drawCircle(canvasMaskedRef.current, clickedCircle, 'green');
 
         dispatch(setDifferenceClickedById(clickedCircle.id));
         setIsCorrect(true);
@@ -72,6 +73,17 @@ export const DiffPicturesContainer = ({ generatedPics }: DiffPicturesContainerPr
       canvasMaskedRef.current.width = 1024;
     }
   }, []);
+
+  useEffect(() => {
+    if (lives === 0) {
+      currentCircles.forEach((circle) => {
+        if (!circle.isClicked) {
+          drawCircle(canvasOriginalRef.current, circle, 'red');
+          drawCircle(canvasMaskedRef.current, circle, 'red');
+        }
+      });
+    }
+  }, [lives]);
 
   return (
     <div className={styles.wrapper}>
