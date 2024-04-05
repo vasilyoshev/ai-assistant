@@ -1,8 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { loseLife, selectDifferences, selectLives, setDifferenceClickedById, setGameStatus } from "slices";
+import { loseLife, selectDifferences, setDifferenceClickedById } from "slices";
 import { ClickFeedback } from "components";
-import { GameStatus } from "enums";
 import { MaskCircle, PicturesResponse } from "interfaces";
 import styles from "./DiffPicturesContainer.module.scss";
 
@@ -14,7 +13,6 @@ export const DiffPicturesContainer = ({ generatedPics }: DiffPicturesContainerPr
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
   const [isCorrect, setIsCorrect] = useState<boolean>();
   const currentCircles = useSelector(selectDifferences);
-  const lives = useSelector(selectLives);
   const canvasOriginalRef = useRef<HTMLCanvasElement>(null);
   const canvasMaskedRef = useRef<HTMLCanvasElement>(null);
 
@@ -65,12 +63,6 @@ export const DiffPicturesContainer = ({ generatedPics }: DiffPicturesContainerPr
       setCursorPosition({ x: event.clientX, y: event.clientY });
     }
   };
-
-  useEffect(() => {
-    if (lives === 0) {
-      dispatch(setGameStatus(GameStatus.LevelFailed));
-    }
-  }, [lives]);
 
   useEffect(() => {
     if (canvasOriginalRef.current && canvasMaskedRef.current) {
