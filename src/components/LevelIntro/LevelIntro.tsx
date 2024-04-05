@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { Ref, forwardRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AnimatedButton, DevTools, DifficultySelector, LevelInfoWrapper } from "components";
 import { selectLevel, selectStyle, selectTopic, setGameStatus, setStyle, setTopic } from "slices";
@@ -6,7 +6,7 @@ import { GameStatus } from "enums";
 import { getRandomStyle, getRandomTopic } from "utils";
 import styles from "./LevelIntro.module.scss";
 
-export const LevelIntro = () => {
+export const LevelIntro = forwardRef((props, ref: Ref<HTMLDivElement>) => {
   const dispatch = useDispatch();
   const level = useSelector(selectLevel);
   const style = useSelector(selectStyle);
@@ -22,7 +22,7 @@ export const LevelIntro = () => {
   }, []);
 
   return (
-    <LevelInfoWrapper>
+    <LevelInfoWrapper ref={ref}>
       <DevTools />
       <span className={styles.gameName}>Find the differences</span>
       <span className={styles.level}>Level {level}</span>
@@ -34,4 +34,4 @@ export const LevelIntro = () => {
       <AnimatedButton onClick={handleStartClick}>Start</AnimatedButton>
     </LevelInfoWrapper>
   );
-};
+});

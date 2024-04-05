@@ -77,13 +77,11 @@ export const ContainerRoute = () => {
   return (
     <>
       {/* TODO describe name transition logic in readme, both for title and pages overall */}
-      <AnimatePresence mode="wait">
-        <Link to="/">
-          <motion.span className={styles.name} style={titleStyle}>
-            pl<motion.span style={{ color: motionStyle.color }}>AI</motion.span>box
-          </motion.span>
-        </Link>
-      </AnimatePresence>
+      <Link to="/">
+        <motion.span className={styles.name} style={titleStyle}>
+          pl<motion.span style={{ color: motionStyle.color }}>AI</motion.span>box
+        </motion.span>
+      </Link>
       <AnimatePresence mode="wait">
         <motion.div
           className={styles.outletWrapper} // TODO direct children have common css, extract to parent

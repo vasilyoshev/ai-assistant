@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
+import { Ref, forwardRef, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { AnimatedButton, DiffPicturesContainer, InpaintMask, Rating, Spinner } from "components";
+import { DiffPicturesContainer, InpaintMask, Rating, Spinner } from "components";
 import {
   selectDifferences,
   selectDifficulty,
@@ -14,8 +14,9 @@ import { useGeneratePicsMutation } from "api";
 import { GameStatus } from "enums";
 import { difficultyToLivesMap } from "utils";
 import styles from "./Level.module.scss";
+import { motion } from "framer-motion";
 
-export const Level = () => {
+export const Level = forwardRef((props, ref: Ref<HTMLDivElement>) => {
   const dispatch = useDispatch();
   const [generatePics, generatedPics] = useGeneratePicsMutation();
   const lives = useSelector(selectLives);
@@ -57,7 +58,7 @@ export const Level = () => {
   }, [lives]);
 
   return (
-    <div className={styles.wrapper}>
+    <div className={styles.wrapper} ref={ref}>
       <InpaintMask onMaskGenerated={onMaskGenerated} />
       {generatedPics.isSuccess && (
         <>
@@ -65,13 +66,19 @@ export const Level = () => {
           <Rating type="heart" totalItems={difficultyToLivesMap[difficulty]} checkedItems={lives} />
           <DiffPicturesContainer generatedPics={generatedPics.data} />
           {levelEndStatus && (
-            <div className={styles.overlay} onClick={updateGameStatus}>
+            <motion.div
+              className={styles.overlay}
+              onClick={updateGameStatus}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 1 }}
+            >
               Tap to continue
-            </div>
+            </motion.div>
           )}
         </>
       )}
       {!generatedPics.isSuccess && <Spinner />}
     </div>
   );
-};
+});

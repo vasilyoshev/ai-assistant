@@ -1,10 +1,11 @@
+import { Ref, forwardRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { AnimatedButton, LevelInfoWrapper, YTPlayer } from "components";
 import { resetGameState } from "slices";
 import styles from "./GameWon.module.scss";
 
-export const GameWon = () => {
+export const GameWon = forwardRef((props, ref: Ref<HTMLDivElement>) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -17,7 +18,7 @@ export const GameWon = () => {
   };
 
   return (
-    <LevelInfoWrapper>
+    <LevelInfoWrapper ref={ref}>
       <span className={styles.title}>Game won!</span>
       <YTPlayer />
       <span className={styles.actionButtons}>
@@ -26,4 +27,4 @@ export const GameWon = () => {
       </span>
     </LevelInfoWrapper>
   );
-};
+});
