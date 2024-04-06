@@ -1,0 +1,9 @@
+.emoji {
+  position: absolute;
+  white-space: nowrap;
+  font-size: 100px;
+
+  @media (orientation: portrait) {
+    font-size: 50px;
+  }
+}

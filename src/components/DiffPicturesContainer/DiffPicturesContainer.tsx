@@ -51,8 +51,8 @@ export const DiffPicturesContainer = ({ generatedPics }: DiffPicturesContainerPr
 
     if (clickedCircle) {
       if (!clickedCircle.isClicked) {
-        drawCircle(canvasOriginalRef.current, clickedCircle, 'green');
-        drawCircle(canvasMaskedRef.current, clickedCircle, 'green');
+        drawCircle(canvasOriginalRef.current, clickedCircle, "green");
+        drawCircle(canvasMaskedRef.current, clickedCircle, "green");
 
         dispatch(setDifferenceClickedById(clickedCircle.id));
         setIsCorrect(true);
@@ -78,8 +78,8 @@ export const DiffPicturesContainer = ({ generatedPics }: DiffPicturesContainerPr
     if (lives === 0) {
       currentCircles.forEach((circle) => {
         if (!circle.isClicked) {
-          drawCircle(canvasOriginalRef.current, circle, 'red');
-          drawCircle(canvasMaskedRef.current, circle, 'red');
+          drawCircle(canvasOriginalRef.current, circle, "red");
+          drawCircle(canvasMaskedRef.current, circle, "red");
         }
       });
     }

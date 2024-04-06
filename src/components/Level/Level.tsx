@@ -4,6 +4,7 @@ import { selectDifferences, selectDifficulty, selectLevel, selectLives, selectSt
 import { useGeneratePicsMutation } from "api";
 import { difficultyToLivesMap } from "utils";
 import { GameStatus } from "enums";
+import { LevelEndStatus } from "types";
 import { DiffPicturesContainer, InpaintMask, LevelEndOverlay, Rating, Spinner } from "components";
 import styles from "./Level.module.scss";
 
@@ -16,7 +17,7 @@ export const Level = forwardRef((props, ref: Ref<HTMLDivElement>) => {
   const topic = useSelector(selectTopic);
   const style = useSelector(selectStyle);
   const [mask, setMask] = useState<string>();
-  const [levelEndStatus, setLevelEndStatus] = useState<GameStatus>();
+  const [levelEndStatus, setLevelEndStatus] = useState<LevelEndStatus>();
   const foundDifferences = differences.filter((difference) => difference.isClicked);
 
   const onMaskGenerated = (canvas: HTMLCanvasElement) => {
