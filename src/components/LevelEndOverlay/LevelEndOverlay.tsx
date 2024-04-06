@@ -1,4 +1,5 @@
 import { useDispatch } from "react-redux";
+import Confetti from "react-confetti";
 import { levelUp, resetLevelState, setGameStatus } from "slices";
 import { GameStatus } from "enums";
 import { LevelEndStatus } from "types";
@@ -25,6 +26,7 @@ export const LevelEndOverlay = ({ levelEndStatus }: LevelEndOverlayProps) => {
     <div className={styles.overlay} onClick={handleOverlayClick}>
       <LevelEndText levelEndStatus={levelEndStatus} />
       <FloatingEmojis levelEndStatus={levelEndStatus} />
+      {levelEndStatus !== GameStatus.LevelFailed && <Confetti recycle={false} numberOfPieces={500} />}
     </div>
   );
 };
