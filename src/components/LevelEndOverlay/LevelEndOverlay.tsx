@@ -26,7 +26,11 @@ export const LevelEndOverlay = ({ levelEndStatus }: LevelEndOverlayProps) => {
     <div className={styles.overlay} onClick={handleOverlayClick}>
       <LevelEndText levelEndStatus={levelEndStatus} />
       <FloatingEmojis levelEndStatus={levelEndStatus} />
-      {levelEndStatus !== GameStatus.LevelFailed && <Confetti recycle={false} numberOfPieces={500} />}
+      <Confetti
+        recycle={false}
+        numberOfPieces={500}
+        colors={levelEndStatus === GameStatus.LevelFailed ? ["#27251F", "#232B2B", "#36454F", "#242124"] : undefined}
+      />
     </div>
   );
 };
