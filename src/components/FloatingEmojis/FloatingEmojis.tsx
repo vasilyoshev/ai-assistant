@@ -13,19 +13,19 @@ export const FloatingEmojis = ({ levelEndStatus }: FloatingEmojisProps) => {
     scale: 0.1,
   };
 
-  const loseEmojis = ["🔎🤔", "❌🤦", "😕🤏", "💀💩", "💣💥"];
-  const winEmojis = ["🥳🎉", "🧐🧠", "🔥🔝", "🔎✅", "👏🍾"];
+  const loseEmojis = ["😱", "🤔", "❌", "🤦", "😕", "🤏", "💀", "💩", "💣", "💥"];
+const winEmojis = ["🥳", "🎉", "🧐", "🧠", "🔥", "🔝", "😁", "✅", "👏", "🍾"];
   const emojis = (levelEndStatus === GameStatus.LevelFailed ? loseEmojis : winEmojis).sort(() => Math.random() - 0.5);
 
   useEffect(() => {
     animationControls.start((i) => ({
       scale: [0, 1, 1, 1, 1],
-      y: ["-0%", "-200%", "-400%", "-600%", "-800%"],
-      opacity: [1, 1, 1, 0, 0],
+      y: [null, "-200%"],
+      opacity: [null, null, null, 0, 0],
       transition: {
-        duration: 4 + Math.random() * 2,
-        delay: i === 0 ? 0 : (i + Math.random()) / 2,
-        times: [0, 0.05, 0.8, 0.85, 1],
+        duration: 1.5 + Math.random() / 2,
+        delay: i === 0 ? 0 : (i + Math.random()) / 4,
+        times: [0, 0.2, 0.7, 0.8, 1],
       },
     }));
   }, []);
