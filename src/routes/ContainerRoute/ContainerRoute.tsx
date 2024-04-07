@@ -19,6 +19,7 @@ export const ContainerRoute = () => {
   const titleLeft = useMotionValue("50%");
   const titleTransform = useMotionValue("translate(-50%, 0)");
   const titleFontSize = useMotionValue("90px");
+  const titleColor = useMotionValue("rgba(255, 255, 255, 1)");
   const initialOpacity = 0;
   const finalOpacity = 1;
   const routeTransitionDuration = 0.3;
@@ -26,6 +27,7 @@ export const ContainerRoute = () => {
   const initialRouteDelay = initialAnimationDelay + 0.2;
   const transitionRouteDelay = 0.1;
   const titleOpacity = useMotionValue(initialOpacity);
+  const regularTextOpacity = useMotionValue(1);
   const { motionStyle } = useMotionStyle();
 
   const titleStyle = {
@@ -34,6 +36,15 @@ export const ContainerRoute = () => {
     transform: titleTransform,
     fontSize: titleFontSize,
     opacity: titleOpacity,
+    color: titleColor,
+  };
+
+  const regularTextStyle = {
+    opacity: regularTextOpacity,
+  };
+
+  const fancyTextStyle = {
+    color: motionStyle.color,
   };
 
   const variants = {
@@ -63,25 +74,30 @@ export const ContainerRoute = () => {
       case "/find-the-differences":
         animate(titleMarginTop, "0px", { duration: 0.5 });
         animate(titleLeft, "100%", { duration: 0.5 });
-        animate(titleTransform, "translate(-110%, 0)", { duration: 0.5 });
+        animate(titleTransform, "translate(-60%, 0)", { duration: 0.5 });
         animate(titleFontSize, "37px", { duration: 0.5 });
+        animate(regularTextOpacity, 0, { duration: 0.5 });
         break;
       default:
         animate(titleMarginTop, "30px", { duration: 0.5 });
         animate(titleLeft, "50%", { duration: 0.5 });
         animate(titleTransform, "translate(-50%, 0)", { duration: 0.5 });
         animate(titleFontSize, "70px", { duration: 0.5 });
+        animate(titleColor, "white", { duration: 0.5 });
+        animate(regularTextOpacity, 1, { duration: 0.5, delay: 0.5 });
     }
   }, [location.pathname]);
 
   return (
     <>
       {/* TODO describe name transition logic in readme, both for title and pages overall */}
-      <Link to="/">
-        <motion.span className={styles.name} style={titleStyle}>
-          pl<motion.span style={{ color: motionStyle.color }}>AI</motion.span>box
-        </motion.span>
-      </Link>
+      <motion.span className={styles.name} style={titleStyle}>
+        <motion.span style={regularTextStyle}>pl</motion.span>
+        <Link to="/" className={styles.homeLink}>
+          <motion.span style={fancyTextStyle}>AI</motion.span>
+        </Link>
+        <motion.span style={regularTextStyle}>box</motion.span>
+      </motion.span>
       <AnimatePresence mode="wait">
         <motion.div
           className={styles.outletWrapper} // TODO direct children have common css, extract to parent

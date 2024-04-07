@@ -12,21 +12,22 @@ interface LevelEndTextProps {
 export const LevelEndText = ({ levelEndStatus }: LevelEndTextProps) => {
   const gameStatus = useSelector(selectGameStatus);
   const overlayAnimationControls = useAnimationControls();
-  const overlayInitialStyles = { opacity: 0, scale: 50 };
+  const overlayInitialStyles = { y: -50, scale: 0 };
 
   useEffect(() => {
-    const introDuration = 1;
+    const introStiffness = 300;
+    const introDamping = 10;
     const shakeDuration = 0.5;
-    const repeatDelay = 5;
+    const shakeDelay = 5;
 
     overlayAnimationControls.start(() => ({
-      opacity: 1,
+      y: 0,
       scale: 1,
-      transition: { duration: introDuration },
+      transition: { type: "spring", stiffness: introStiffness, damping: introDamping },
     }));
     overlayAnimationControls.start(() => ({
       rotate: [0, 10, -10, 10, -10, 10, 0],
-      transition: { duration: shakeDuration, delay: introDuration + repeatDelay, repeat: Infinity, repeatDelay },
+      transition: { duration: shakeDuration, delay: shakeDelay, repeatDelay: shakeDelay, repeat: Infinity },
     }));
   }, [gameStatus]);
 
