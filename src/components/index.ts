@@ -15,3 +15,4 @@ export * from "./ClickFeedback";
 export * from "./LevelEndOverlay";
 export * from "./FloatingEmojis";
 export * from "./LevelEndText";
+export * from "./ConfettiWrapper";
