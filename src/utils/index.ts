@@ -11,3 +11,4 @@ export * from "./getMaxDifferenceRadius";
 export * from "./getMinDifferenceRadius";
 export * from "./difficultyToLivesMap";
 export * from "./getRandomPercent";
+export * from "./drawCircle";

@@ -2,7 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loseLife, selectDifferences, selectLives, setDifferenceClickedById } from "slices";
 import { ClickFeedback } from "components";
-import { MaskCircle, PicturesResponse } from "interfaces";
+import { Click, PicturesResponse } from "interfaces";
+import { drawCircle } from "utils";
 import styles from "./DiffPicturesContainer.module.scss";
 
 interface DiffPicturesContainerProps {
@@ -10,34 +11,11 @@ interface DiffPicturesContainerProps {
 }
 export const DiffPicturesContainer = ({ generatedPics }: DiffPicturesContainerProps) => {
   const dispatch = useDispatch();
-  const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
-  const [isCorrect, setIsCorrect] = useState<boolean>();
+  const [click, setClick] = useState<Click>({ isCorrect: true, x: 0, y: 0 });
   const currentCircles = useSelector(selectDifferences);
   const lives = useSelector(selectLives);
   const canvasOriginalRef = useRef<HTMLCanvasElement>(null);
   const canvasMaskedRef = useRef<HTMLCanvasElement>(null);
-
-  // TODO extract to separate component
-  const drawCircle = (canvas: HTMLCanvasElement, circle: MaskCircle, color: "green" | "red") => {
-    const ctx = canvas.getContext("2d");
-    if (ctx) {
-      const quart = Math.PI / 2;
-      const circ = Math.PI * 2;
-      let percentage = 0;
-      const draw = () => {
-        ctx.beginPath();
-        ctx.arc(circle.x, circle.y, circle.radius, -quart, circ * (percentage / 100) - quart, false);
-        ctx.strokeStyle = color;
-        ctx.lineWidth = 5;
-        ctx.stroke();
-
-        percentage++;
-
-        if (percentage <= 100) requestAnimationFrame(draw);
-      };
-      draw();
-    }
-  };
 
   const onCanvasClick = (event: React.MouseEvent<HTMLCanvasElement>) => {
     const canvas = event.target as HTMLCanvasElement;
@@ -55,13 +33,11 @@ export const DiffPicturesContainer = ({ generatedPics }: DiffPicturesContainerPr
         drawCircle(canvasMaskedRef.current, clickedCircle, "green");
 
         dispatch(setDifferenceClickedById(clickedCircle.id));
-        setIsCorrect(true);
-        setCursorPosition({ x: event.clientX, y: event.clientY });
+        setClick({ x: event.clientX, y: event.clientY, isCorrect: true });
       }
     } else {
       dispatch(loseLife());
-      setIsCorrect(false);
-      setCursorPosition({ x: event.clientX, y: event.clientY });
+      setClick({ x: event.clientX, y: event.clientY, isCorrect: false });
     }
   };
 
@@ -104,7 +80,7 @@ export const DiffPicturesContainer = ({ generatedPics }: DiffPicturesContainerPr
         <canvas ref={canvasMaskedRef} className={styles.overlayCanvas} onClick={onCanvasClick} />
       </div>
 
-      <ClickFeedback isCorrect={isCorrect} cursorPosition={cursorPosition} />
+      <ClickFeedback isCorrect={click.isCorrect} cursorPosition={{ x: click.x, y: click.y }} />
     </div>
   );
 };
