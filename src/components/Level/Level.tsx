@@ -49,8 +49,13 @@ export const Level = forwardRef((props, ref: Ref<HTMLDivElement>) => {
       <InpaintMask onMaskGenerated={onMaskGenerated} />
       {generatedPics.isSuccess && (
         <>
-          <Rating type="star" totalItems={differences.length} checkedItems={foundDifferences.length} />
-          <Rating type="heart" totalItems={difficultyToLivesMap[difficulty]} checkedItems={lives} />
+          <div className={styles.gameData}>
+            <div className={styles.level}>{level}</div>
+            <div>
+              <Rating type="star" totalItems={differences.length} checkedItems={foundDifferences.length} />
+              <Rating type="heart" totalItems={difficultyToLivesMap[difficulty]} checkedItems={lives} />
+            </div>
+          </div>
           <DiffPicturesContainer generatedPics={generatedPics.data} />
           {levelEndStatus && <LevelEndOverlay levelEndStatus={levelEndStatus} />}
         </>
