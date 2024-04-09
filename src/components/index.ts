@@ -3,7 +3,7 @@ export * from "./InpaintMask";
 export * from "./AnimatedButton";
 export * from "./Meteors";
 export * from "./DevTools";
-export * from "./YTPlayer";
+export * from "./MalcolmVideo";
 export * from "./Rating";
 export * from "./Spinner";
 export * from "./Level";

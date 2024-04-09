@@ -1,8 +1,8 @@
 import { useRef, useState } from "react";
 import ReactPlayer from "react-player";
-import styles from "./YTPlayer.module.scss";
+import styles from "./MalcolmVideo.module.scss";
 
-export const YTPlayer = () => {
+export const MalcolmVideo = () => {
   const playerRef = useRef(null);
   const [playing, setPlaying] = useState(true);
 
