@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { selectDifferences, selectDifficulty, selectLevel, selectLives, selectStyle, selectTopic } from "slices";
 import { useGeneratePicsMutation } from "api";
 import { difficultyToLivesMap } from "utils";
-import { GameStatus } from "enums";
+import { GameStatus, RatingType } from "enums";
 import { LevelEndStatus } from "types";
 import { DiffPicturesContainer, InpaintMask, LevelEndOverlay, Rating, Spinner } from "components";
 import styles from "./Level.module.scss";
@@ -52,8 +52,8 @@ export const Level = forwardRef((props, ref: Ref<HTMLDivElement>) => {
           <div className={styles.gameData}>
             <div className={styles.level}>{level}</div>
             <div>
-              <Rating type="star" totalItems={differences.length} checkedItems={foundDifferences.length} />
-              <Rating type="heart" totalItems={difficultyToLivesMap[difficulty]} checkedItems={lives} />
+              <Rating type={RatingType.Star} totalItems={differences.length} checkedItems={foundDifferences.length} />
+              <Rating type={RatingType.Heart} totalItems={difficultyToLivesMap[difficulty]} checkedItems={lives} />
             </div>
           </div>
           <DiffPicturesContainer generatedPics={generatedPics.data} />
