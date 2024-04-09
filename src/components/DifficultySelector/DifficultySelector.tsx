@@ -5,6 +5,7 @@ import { useMotionStyle } from "hooks";
 import { selectDifficulty, setDifficulty } from "slices";
 import { AnimatedButton } from "components";
 import { Difficulty } from "enums";
+import { backgroundColor } from "consts";
 import styles from "./DifficultySelector.module.scss";
 
 export const DifficultySelector = () => {
@@ -30,7 +31,7 @@ export const DifficultySelector = () => {
               initial={{ opacity: 0, y: -8 }}
               exit={{ opacity: 0, y: -8 }}
             >
-              <motion.div className={styles.dropdown} style={{ boxShadow: motionStyle.boxShadow }}>
+              <motion.div className={styles.dropdown} style={{ boxShadow: motionStyle.boxShadow, backgroundColor }}>
                 {Object.values(Difficulty).map((item, index) => {
                   return (
                     <motion.div

@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { animate, motion, useMotionTemplate, useMotionValue } from "framer-motion";
 import { Meteors } from "components";
 import { AppRouter, usePrimaryColor } from "utils";
-import { initialAnimationDelay } from "consts";
+import { backgroundColor, initialAnimationDelay } from "consts";
 import styles from "./App.module.scss";
 
 export const App = () => {
@@ -11,7 +11,7 @@ export const App = () => {
   const backgroundImage = useMotionTemplate`
     radial-gradient(
       ${gradientMotionValue}% 80% at 50% 50%, 
-      #020617 80%, 
+      ${backgroundColor} 80%, 
       ${colorMotionValue}
     )
   `;

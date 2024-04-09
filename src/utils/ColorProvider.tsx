@@ -1,9 +1,10 @@
 // TODO describe context usage in readme
 import { createContext, useContext, useEffect, ReactNode } from "react";
 import { useMotionValue, animate, MotionValue } from "framer-motion";
+import { mainColor } from "consts";
 
 const PrimaryColorContext = createContext<MotionValue<string>>(null);
-const COLORS_TOP = ["#454ADE", "#B00772", "#E05200", "#F4B02A", "#306B34"];
+const COLORS_TOP = [mainColor, "#B00772", "#E05200", "#F4B02A", "#306B34"];
 
 export const usePrimaryColor = () => useContext(PrimaryColorContext);
 
