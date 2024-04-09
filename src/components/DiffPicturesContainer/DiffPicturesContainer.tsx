@@ -25,6 +25,7 @@ export const DiffPicturesContainer = ({ generatedPics }: DiffPicturesContainerPr
     const x = ((event.clientX - rect.left) / canvas.offsetWidth) * 1024;
     const y = ((event.clientY - rect.top) / canvas.offsetHeight) * 1024;
 
+    // Check if the click event is inside one of the circles (if Euclidean distance <= radius)
     const clickedCircle = currentCircles.find((circle) => Math.hypot(circle.x - x, circle.y - y) <= circle.radius);
 
     if (clickedCircle) {
