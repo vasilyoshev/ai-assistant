@@ -1,4 +1,4 @@
-import { Balance, PicturesRequest, PicturesResponse, User } from "interfaces";
+import { Balance, PicturesRequest, PicturesResponse } from "interfaces";
 import { FetchBaseQueryError, createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { mockGenerate } from "mocks";
 import { RootState } from "store";
@@ -12,6 +12,12 @@ export const api = createApi({
   endpoints: (builder) => ({
     getBalance: builder.query<Balance, void>({
       query: () => "user/balance",
+    }),
+    healthCheck: builder.query<string, void>({
+      query: () => ({
+        url: "/healthcheck",
+        responseHandler: "text",
+      }),
     }),
     generatePics: builder.mutation<PicturesResponse, PicturesRequest>({
       queryFn: async (body, queryApi, extraOptions, baseQuery) => {
@@ -31,4 +37,4 @@ export const api = createApi({
   }),
 });
 
-export const { useGetBalanceQuery, useGeneratePicsMutation } = api;
+export const { useGetBalanceQuery, useHealthCheckQuery, useGeneratePicsMutation } = api;
