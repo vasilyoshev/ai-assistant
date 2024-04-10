@@ -10,12 +10,14 @@ import { loseLife, selectDifferences, selectLives, setDifferenceClickedById } fr
 import { ClickFeedback } from "components";
 import { Click, PicturesResponse } from "interfaces";
 import { drawCircle } from "utils";
+import { LevelEndStatus } from "types";
 import styles from "./DiffPicturesContainer.module.scss";
 
 interface DiffPicturesContainerProps {
   generatedPics: PicturesResponse;
+  levelEndStatus: LevelEndStatus;
 }
-export const DiffPicturesContainer = ({ generatedPics }: DiffPicturesContainerProps) => {
+export const DiffPicturesContainer = ({ generatedPics, levelEndStatus }: DiffPicturesContainerProps) => {
   const dispatch = useDispatch();
   const [click, setClick] = useState<Click>({ isCorrect: true, x: 0, y: 0 });
   const [rzppState, setRzppState] = useState<ReactZoomPanPinchState>({
@@ -108,6 +110,13 @@ export const DiffPicturesContainer = ({ generatedPics }: DiffPicturesContainerPr
     maskedRzppRef.current.instance.transformState.positionY = rzppState.positionY;
     maskedRzppRef.current.instance.applyTransformation();
   }, [rzppState]);
+
+  useEffect(() => {
+    if (!levelEndStatus) return;
+
+    originalRzppRef.current.resetTransform();
+    maskedRzppRef.current.resetTransform();
+  }, [levelEndStatus]);
 
   return (
     <div className={styles.wrapper} onMouseDown={onMouseDown} onMouseUp={onMouseUp}>

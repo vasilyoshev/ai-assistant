@@ -56,7 +56,7 @@ export const Level = forwardRef((props, ref: Ref<HTMLDivElement>) => {
               <Rating type={RatingType.Heart} totalItems={difficultyToLivesMap[difficulty]} checkedItems={lives} />
             </div>
           </div>
-          <DiffPicturesContainer generatedPics={generatedPics.data} />
+          <DiffPicturesContainer generatedPics={generatedPics.data} levelEndStatus={levelEndStatus} />
           {levelEndStatus && <LevelEndOverlay levelEndStatus={levelEndStatus} />}
         </>
       )}
