@@ -1,5 +1,6 @@
 .wrapper {
   display: flex;
+  gap: 5px;
   flex: 1;
   flex-grow: 1;
   justify-content: center;
@@ -9,7 +10,6 @@
   .imgContainer {
     position: relative;
     display: flex;
-    margin: 5px;
     overflow: auto;
     user-select: none;
 

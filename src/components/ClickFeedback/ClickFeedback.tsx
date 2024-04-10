@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { AnimationPlaybackControls, motion, useAnimate, useMotionValue } from "framer-motion";
 import styles from "./ClickFeedback.module.scss";
 
@@ -11,6 +11,7 @@ export const ClickFeedback = ({ isCorrect, cursorPosition }: ClickFeedbackProps)
   const cursorOpacity = useMotionValue(0);
   const cursorPathLength = useMotionValue(0);
   const [ongoingAnimations, setOngoingAnimations] = useState<AnimationPlaybackControls[]>([]);
+  const prevCursorPositionRef = useRef(cursorPosition);
 
   const svgSize = 100;
   const svgStyle = {
@@ -39,7 +40,13 @@ export const ClickFeedback = ({ isCorrect, cursorPosition }: ClickFeedbackProps)
   };
 
   useEffect(() => {
-    if (cursorPosition) {
+    if (!cursorPosition) return;
+
+    const isCursorPositionSame =
+      cursorPosition.x === prevCursorPositionRef.current.x && cursorPosition.y === prevCursorPositionRef.current.y;
+      
+    if (!isCursorPositionSame) {
+      prevCursorPositionRef.current = cursorPosition;
       cursorAnimation();
     }
   }, [cursorPosition]);
