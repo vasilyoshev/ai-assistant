@@ -25,6 +25,7 @@ export const Spinner = () => {
   // If health check is successful, fill up to 100% in 17 seconds (estimated time to generate image)
   // If health check is unsuccessful, fill up to 100% in 30 seconds (estimated time to wake up backend)
   useEffect(() => {
+    setLoadingPercentage(0);
     const generationTime = 17;
     const backendWakeUpTime = 30;
     const targetTime = isHealthCheckSuccess ? generationTime : backendWakeUpTime;
