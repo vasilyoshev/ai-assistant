@@ -4,7 +4,7 @@ import { useMotionValue, animate, MotionValue } from "framer-motion";
 import { mainColor } from "consts";
 
 const PrimaryColorContext = createContext<MotionValue<string>>(null);
-const COLORS_TOP = [mainColor, "#B00772", "#E05200", "#F4B02A", "#306B34"];
+const COLORS_TOP = [mainColor, "#2045A6", "#E05200", "#F4B02A", "#B7A8EA", "#B00772"];
 
 export const usePrimaryColor = () => useContext(PrimaryColorContext);
 
