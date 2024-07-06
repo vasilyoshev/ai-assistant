@@ -59,8 +59,10 @@ Image generation logic:
 3. A mask is generated locally for every level - 1024x1024 white image with black circles. Circle positions are random. Circle count and radius range is determined by the difficulty and level progression.
 3. The initially generated image and the mask are used for generating the second image.
 
+#### Game flowchart
 ![Flowchart](ftd-flowchart.png)
 
+#### Game state
 ![Game state](ftd-game-state.png)
 
 ---
