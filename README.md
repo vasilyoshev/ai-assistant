@@ -51,6 +51,14 @@ plAIbox is a playground for testing small projects.
 
 ### Find the differences
 
+#### Game about finding the differences in AI generated images.
+
+Image generation logic:
+1. Topic and style of the image is determined in the level intro.
+2. An initial 1024x1024 image is generated using Stability AI API.
+3. A mask is generated locally for every level - 1024x1024 white image with black circles. Circle positions are random. Circle count and radius range is determined by the difficulty and level progression.
+3. The initially generated image and the mask are used for generating the second image.
+
 ![Flowchart](ftd-flowchart.png)
 
 ![Game state](ftd-game-state.png)
@@ -106,5 +114,3 @@ The build is minified and the filenames include the hashes.
 ## 📄 License
 
 This project is protected under the MIT License. For more details, refer to the [LICENSE](LICENSE) file.
-
----
